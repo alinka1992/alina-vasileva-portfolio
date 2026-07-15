@@ -29,6 +29,14 @@ const education = [
   ["2009", "Малый журфак", "НовГУ им. Ярослава Мудрого"],
 ];
 
+const managementAreas = [
+  ["Стратегия и P&L", "Планирование · бюджетирование · юнит-экономика · управленческая отчётность"],
+  ["Коммерческое управление", "Продажи · лидогенерация · пресейл · тендеры · переговоры"],
+  ["Маркетинг и PR", "Стратегия · performance · контент · репутация · аналитика"],
+  ["Процессы и автоматизация", "CRM · 1С · BI · регламенты · интеграция AI"],
+  ["Команда и мотивация", "Оргструктура · KPI · подбор · развитие · кросс-функциональная работа"],
+];
+
 function MiniDashboard() {
   return (
     <div className="dashboard" aria-hidden="true">
@@ -69,10 +77,56 @@ function Funnel() {
 }
 
 function PuzzleSystem() {
+  const modules = ["P&L", "CRM", "1С", "BI", "KPI", "SALES", "TEAM", "AI", "REPORTS"];
   return (
     <div className="puzzle-system" aria-hidden="true">
-      {Array.from({ length: 9 }).map((_, i) => <i key={i} style={{ "--n": i } as React.CSSProperties} />)}
+      {modules.map((module, i) => <i key={module} style={{ "--n": i } as React.CSSProperties}><span>{module}</span></i>)}
       <div className="system-axis"><span>CRM</span><span>1С</span><span>BI</span><span>AI</span></div>
+    </div>
+  );
+}
+
+function SalesFunnel() {
+  const stages = [
+    ["69", "квалифицированных встреч"],
+    ["40+", "КП в pipeline"],
+    ["8", "запусков проектов"],
+    ["2", "тендерные победы"],
+  ];
+  return (
+    <div className="sales-funnel" aria-label="Показатели коммерческой воронки">
+      {stages.map((stage, i) => <div className="sales-stage" key={stage[1]} style={{ "--stage": i } as React.CSSProperties}><b>{stage[0]}</b><span>{stage[1]}</span></div>)}
+      <div className="conversion-pair"><span><b>37,5%</b> лид / встреча → КП</span><span><b>22,5%</b> КП → сделка</span></div>
+    </div>
+  );
+}
+
+function OperationsDashboard() {
+  return (
+    <div className="operations-dashboard" aria-label="Показатели операционного управления">
+      <div className="ops-main"><span>ВЫРУЧКА / ГОД К ГОДУ</span><b>+71%</b><i /></div>
+      <div className="ops-row"><span><b>41</b> новый проект</span><span><b>5×</b> ниже занятость собственника в операционных задачах</span></div>
+      <div className="ops-stack"><span>Битрикс24</span><span>1С</span><span>DataLens</span><span>AI</span></div>
+    </div>
+  );
+}
+
+function MarketingDashboard() {
+  const rows = [["Трафик", "×4", 92], ["Сумма заявок", "×3", 72], ["Эффективность контента", "×5", 100], ["CPO", "÷2", 48]];
+  return <div className="metric-dashboard" aria-label="Результаты маркетинга">{rows.map((row, i) => <div key={row[0]}><span>{row[0]}</span><i><b style={{ "--metric": `${row[2]}%`, "--delay": i } as React.CSSProperties} /></i><strong>{row[1]}</strong></div>)}</div>;
+}
+
+function GrowthDashboard() {
+  const metrics = [["+86%", "выручка и прибыль"], ["40", "лидов в месяц"], ["+150%", "охват"], ["80%", "маржинальность нового юнита"]];
+  return <div className="growth-dashboard" aria-label="Результаты развития направления">{metrics.map((metric, i) => <div key={metric[1]} style={{ "--delay": i } as React.CSSProperties}><b>{metric[0]}</b><span>{metric[1]}</span></div>)}</div>;
+}
+
+function CaseText({ task, approach, solution }: { task: string; approach: string; solution: string }) {
+  return (
+    <div className="case-structure">
+      <div><span>Задача</span><p>{task}</p></div>
+      <div><span>Подход</span><p>{approach}</p></div>
+      <div><span>Решение</span><p>{solution}</p></div>
     </div>
   );
 }
@@ -109,9 +163,9 @@ export default function App() {
       <section className="hero" id="top">
         <MiniDashboard />
         <div className="hero-copy reveal">
-          <p className="index">EXECUTIVE PORTFOLIO / 2026</p>
+          <p className="index">ПОРТФОЛИО / 2026</p>
           <h1>Алина<br/><span>Васильева</span></h1>
-          <h2>CCO / COO</h2>
+          <h2>Коммерческий и операционный директор</h2>
           <div className="hero-fact"><strong>12 лет</strong><span>в управлении</span></div>
           <div className="hero-links"><a href="#cases">Кейсы ↓</a><a href="alina-vasileva-resume.pdf" download>Резюме PDF ↓</a></div>
         </div>
@@ -123,44 +177,44 @@ export default function App() {
       </section>
 
       <section className="facts section" id="facts">
-        <div className="section-head reveal"><span>01 / ФАКТЫ</span><h2>Измеримые<br/>результаты.</h2><p>Данные из резюме и реализованных проектов.</p></div>
+        <div className="section-head reveal"><span>01 / ПОКАЗАТЕЛИ</span><h2>Ключевые<br/>показатели</h2><p>Результаты по завершённым периодам и проектам.</p></div>
         <div className="fact-grid">
           {facts.map((fact, i) => <article className="fact reveal" key={fact.value}><span>0{i + 1}</span><strong>{fact.value}</strong><h3>{fact.label}</h3><p>{fact.note}</p><i /></article>)}
         </div>
         <div className="control-table reveal">
-          <div className="table-title"><span>УПРАВЛЕНЧЕСКИЙ КОНТУР</span><b>STATUS / ACTIVE</b></div>
-          {["Стратегия и P&L", "Продажи и лидогенерация", "Маркетинг и PR", "Процессы и автоматизация", "Команда и мотивация"].map((item, i) => <div className="table-row" key={item}><span>0{i + 1}</span><strong>{item}</strong><i><b style={{ width: `${74 + i * 4}%` }} /></i><em>CONTROLLED</em></div>)}
+          <div className="table-title"><span>УПРАВЛЕНЧЕСКИЙ КОНТУР</span><b>ЗОНЫ ОТВЕТСТВЕННОСТИ</b></div>
+          {managementAreas.map((item, i) => <div className="table-row" key={item[0]}><span>0{i + 1}</span><strong>{item[0]}</strong><p>{item[1]}</p><em>IN SCOPE</em></div>)}
         </div>
       </section>
 
       <section className="cases section" id="cases">
-        <div className="section-head reveal"><span>02 / КЕЙСЫ</span><h2>Задача.<br/>Система. Результат.</h2><p>Без оценочных формулировок. Только контекст, действия и показатели.</p></div>
+        <div className="section-head reveal"><span>02 / КЕЙСЫ</span><h2>Реализованные<br/>задачи</h2><p>Контекст, зона ответственности, выполненные действия и результат.</p></div>
 
         <article className="case commercial reveal">
-          <div className="case-copy"><div className="case-no">CASE 01 / 2026</div><p>Медиа Инсайт · коммерческий директор</p><h3>Пересборка коммерческого управления digital-направлением.</h3><ul><li>Лидогенерация и квалификация</li><li>Пресейл, тендеры и переговоры</li><li>Запуск проектов и контроль маржи</li></ul><div className="case-metrics"><b>69<span>встреч</span></b><b>40+<span>КП</span></b><b>22,5%<span>КП → сделка</span></b><b>8 / 2<span>запуски / тендеры</span></b></div></div>
-          <div className="case-viz"><div className="viz-label">SALES PIPELINE / LIVE</div><Funnel /><div className="funnel-legend"><span>INPUT</span><span>QUALIFY</span><span>OUTPUT</span></div></div>
+          <div className="case-copy"><div className="case-no">КЕЙС 01 / 2026</div><p>Медиа Инсайт · коммерческий директор</p><h3>Коммерческое управление digital-направлением</h3><CaseText task="Сформировать управляемый коммерческий контур digital-направления: от привлечения и квалификации лида до запуска проекта." approach="Единый цикл продаж, пресейла и тендерной работы с контролем прогнозной выручки, маржинальности и следующих шагов в CRM." solution="Планы продаж по выручке и марже; подготовка и защита КП; управление пресейлом; переговоры на C-level; контроль экономики сделок и запуска проектов." /></div>
+          <div className="case-viz"><div className="viz-label">РЕЗУЛЬТАТ / 4 МЕСЯЦА</div><SalesFunnel /><div className="result-strip"><b>×4,7<span>оборот направления</span></b><b>×8,3<span>маржа направления</span></b></div></div>
         </article>
 
         <article className="case systems reveal">
-          <div className="case-copy"><div className="case-no">CASE 02 / 2023—2025</div><p>Интерэстейт / SETEVIE · исполнительный директор</p><h3>Переход от ручного управления к системе.</h3><ul><li>Стратегия продуктовых направлений и P&L</li><li>Регламенты и кросс-функциональные процессы</li><li>CRM, 1С, DataLens и AI</li></ul><div className="case-metrics"><b>+71%<span>выручка</span></b><b>41<span>проект</span></b><b>5×<span>меньше операционки</span></b></div></div>
-          <div className="case-viz"><div className="viz-label">OPERATING SYSTEM / ASSEMBLY</div><PuzzleSystem /></div>
+          <div className="case-copy"><div className="case-no">КЕЙС 02 / 2023—2025</div><p>Интерэстейт / SETEVIE · исполнительный директор</p><h3>Систематизация операционного управления</h3><CaseText task="Обеспечить рост агентства и снизить зависимость ежедневной работы от участия собственника." approach="Управление продуктовой стратегией, бюджетами, P&L, топ-менеджментом и кросс-функциональными командами." solution="Внедрение Битрикс24, 1С, DataLens и AI; настройка процессов и управленческой отчётности; комплектование штата; KPI и OKR; управление тендерами и контрактами." /></div>
+          <div className="case-viz"><div className="viz-label">РЕЗУЛЬТАТ / 2,5 ГОДА</div><OperationsDashboard /><PuzzleSystem /></div>
         </article>
 
         <div className="case-pair">
-          <article className="compact-case reveal"><span>CASE 03 / GARWIN</span><h3>Маркетинг и PR</h3><div className="bar-chart"><i/><i/><i/><i/><i/></div><dl><div><dt>×4</dt><dd>трафик</dd></div><div><dt>×3</dt><dd>сумма заявок</dd></div><div><dt>÷2</dt><dd>CPO</dd></div></dl></article>
-          <article className="compact-case reveal"><span>CASE 04 / АЛЬЯНС</span><h3>Новое направление</h3><div className="line-chart"><svg viewBox="0 0 500 160"><path d="M0 145 C80 135 95 120 150 125 S245 105 290 78 S380 66 500 15"/></svg></div><dl><div><dt>+86%</dt><dd>выручка и прибыль</dd></div><div><dt>80%</dt><dd>маржинальность юнита</dd></div></dl></article>
+          <article className="compact-case reveal"><span>КЕЙС 03 / GARWIN / 2019—2022</span><h3>Маркетинг и PR федерального поставщика</h3><CaseText task="Управлять маркетингом и онлайн-продажами компании с ассортиментом более 100 000 SKU." approach="Многоканальные кампании, медиапланирование, бюджетирование и управление рекламой, PR и производством контента." solution="Сформирована команда; организовано производство контента; настроено управление кампаниями и контроль расходов." /><MarketingDashboard /></article>
+          <article className="compact-case reveal"><span>КЕЙС 04 / АЛЬЯНС / 2016—2019</span><h3>Развитие бизнеса и нового направления</h3><CaseText task="Создать стабильный поток клиентов и запустить новое направление юридической компании." approach="Стратегии привлечения, партнёрский маркетинг, корпоративные коммуникации и PR." solution="Партнёрства с Торгово-промышленной палатой, Центром помощи мигрантам и migranto.ru; запуск нового бизнес-юнита." /><GrowthDashboard /></article>
         </div>
       </section>
 
       <section className="career section" id="career">
-        <div className="section-head reveal"><span>03 / ОПЫТ</span><h2>2016—2026.</h2><p>Развитие бизнеса → маркетинг → операционное управление → CCO.</p></div>
+        <div className="section-head reveal"><span>03 / ОПЫТ</span><h2>Опыт работы</h2><p>Должности и зоны ответственности с 2016 года.</p></div>
         <div className="career-table">
           {experience.map((row, i) => <article className="career-row reveal" key={row[1]}><span>0{i + 1}</span><time>{row[0]}</time><h3>{row[1]}</h3><p>{row[2]}</p><b>{row[3]}</b></article>)}
         </div>
       </section>
 
       <section className="education section" id="education">
-        <div className="section-head reveal"><span>04 / ОБРАЗОВАНИЕ</span><h2>Управление.<br/>Аналитика. Маркетинг.</h2><p>Высшее образование и программы повышения квалификации.</p></div>
+        <div className="section-head reveal"><span>04 / ОБРАЗОВАНИЕ</span><h2>Образование<br/>и программы</h2><p>Высшее образование и дополнительное обучение.</p></div>
         <div className="edu-grid">
           {education.map((row, i) => <article className="edu reveal" key={`${row[0]}-${row[1]}`}><span>{String(i + 1).padStart(2, "0")}</span><time>{row[0]}</time><h3>{row[1]}</h3><p>{row[2]}</p><i>↗</i></article>)}
         </div>
@@ -169,8 +223,8 @@ export default function App() {
 
       <section className="contact" id="contact">
         <div className="contact-dashboard" aria-hidden="true"><MiniDashboard /></div>
-        <div className="contact-copy reveal"><span>05 / КОНТАКТЫ</span><h2>Алина<br/>Васильева.</h2><p>Коммерческий директор · CCO · COO</p><div><a href="mailto:alinavasileva.jour@gmail.com">alinavasileva.jour@gmail.com ↗</a><a href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer">Telegram ↗</a><a href="alina-vasileva-resume.pdf" download>Резюме PDF ↓</a></div></div>
-        <footer><span>Санкт-Петербург · 2026</span><span>12 лет в управлении</span><span>© Алина Васильева</span></footer>
+        <div className="contact-copy reveal"><span>05 / КОНТАКТЫ</span><h2>Контакты</h2><p>Коммерческий директор</p><div><a href="mailto:alinavasileva.jour@gmail.com">alinavasileva.jour@gmail.com ↗</a><a href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer">Telegram ↗</a><a href="alina-vasileva-resume.pdf" download>Резюме PDF ↓</a></div></div>
+        <footer><span>Санкт-Петербург · 2026</span><span>Коммерческий директор</span><span>alinavasileva.jour@gmail.com</span></footer>
       </section>
     </main>
   );
