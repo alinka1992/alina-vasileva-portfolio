@@ -165,7 +165,7 @@ export default function App() {
         <div className="hero-copy reveal">
           <p className="index">ПОРТФОЛИО / 2026</p>
           <h1>Алина<br/><span>Васильева</span></h1>
-          <h2>Коммерческий и операционный директор</h2>
+          <h2>CCO / COO</h2>
           <div className="hero-fact"><strong>12 лет</strong><span>в управлении</span></div>
           <div className="hero-links"><a href="#cases">Кейсы ↓</a><a href="alina-vasileva-resume.pdf" download>Резюме PDF ↓</a></div>
         </div>
