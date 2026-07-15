@@ -274,10 +274,51 @@ function ScrollDataCore() {
   return <canvas className="scroll-data-core" ref={canvasRef} aria-hidden="true" />;
 }
 
+function ScrollCasePrelude() {
+  const sceneRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const update = () => {
+      const scene = sceneRef.current;
+      if (!scene) return;
+      const rect = scene.getBoundingClientRect();
+      const distance = Math.max(scene.offsetHeight - innerHeight, 1);
+      const value = Math.min(1, Math.max(0, -rect.top / distance));
+      scene.style.setProperty("--story", value.toFixed(4));
+    };
+    update();
+    addEventListener("scroll", update, { passive: true });
+    addEventListener("resize", update);
+    return () => {
+      removeEventListener("scroll", update);
+      removeEventListener("resize", update);
+    };
+  }, []);
+
+  return (
+    <div className="case-prelude" ref={sceneRef} aria-label="Переход к кейсам">
+      <div className="prelude-sticky">
+        <div className="prelude-glow" />
+        <div className="prelude-dashboard">
+          <div className="prelude-rail"><i /><i /><i /><i /></div>
+          <div className="prelude-card card-a"><span>PIPELINE</span><b>69</b><small>встреч</small></div>
+          <div className="prelude-card card-b"><span>PROJECTS</span><b>41</b><small>новый проект</small></div>
+          <div className="prelude-card card-c"><span>DYNAMICS</span><svg viewBox="0 0 260 90"><path d="M2 79C34 77 38 57 68 60S104 34 137 42s40-25 66-17 28-17 55-19" /></svg></div>
+          <div className="prelude-card card-d"><span>CONTROL</span><i /><i /><i /></div>
+        </div>
+        <div className="prelude-tablet"><span className="tablet-camera" /><div className="tablet-screen"><b>EXECUTIVE<br/>DASHBOARD</b><small>Факты · процессы · результат</small></div></div>
+        <div className="prelude-copy"><span>02 / КЕЙСЫ</span><h3>Четыре задачи.<br/>Четыре системы.</h3><p>Каждый кейс показан через фактические действия и измеримый результат.</p></div>
+        <div className="prelude-step"><i /><i /><i /></div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [activeCourse, setActiveCourse] = useState(0);
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
     const onScroll = () => {
@@ -293,7 +334,7 @@ export default function App() {
   }, []);
 
   return (
-    <main>
+    <main data-theme={theme}>
       <ScrollDataCore />
       <div className="progress" style={{ transform: `scaleX(${progress})` }} />
       <header>
@@ -301,7 +342,7 @@ export default function App() {
         <nav className={menuOpen ? "open" : ""}>
           <a href="#facts">Факты</a><a href="#cases">Кейсы</a><a href="#career">Опыт</a><a href="#education">Образование</a>
         </nav>
-        <a className="contact-link" href="mailto:alinavasileva.jour@gmail.com">Контакты ↗</a>
+        <div className="header-actions"><button className="theme-toggle" onClick={() => setTheme(theme === "light" ? "dark" : "light")} aria-label="Переключить светлую и тёмную тему"><i />{theme === "light" ? "DARK" : "LIGHT"}</button><a className="contact-link" href="mailto:alinavasileva.jour@gmail.com">Контакты ↗</a></div>
         <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Меню"><i /><i /></button>
       </header>
 
@@ -335,19 +376,21 @@ export default function App() {
       <section className="cases section" id="cases">
         <div className="section-head reveal"><span>02 / КЕЙСЫ</span><h2>Реализованные<br/>задачи</h2><p>Контекст, зона ответственности, выполненные действия и результат.</p></div>
 
-        <article className="case commercial reveal">
+        <ScrollCasePrelude />
+
+        <article className="case commercial case-scene case-scene-funnel reveal">
           <div className="case-copy"><div className="case-no">КЕЙС 01 / 2026</div><p>Медиа Инсайт · коммерческий директор</p><h3>Коммерческое управление digital-направлением</h3><CaseText task="Сформировать управляемый коммерческий контур digital-направления: от привлечения и квалификации лида до запуска проекта." approach="Единый цикл продаж, пресейла и тендерной работы с контролем прогнозной выручки, маржинальности и следующих шагов в CRM." solution="Планы продаж по выручке и марже; подготовка и защита КП; управление пресейлом; переговоры на C-level; контроль экономики сделок и запуска проектов." /></div>
           <div className="case-viz"><MotionBackdrop labels={["69 ВСТРЕЧ", "40+ КП", "22,5%", "8 ЗАПУСКОВ", "2 ПОБЕДЫ"]} /><div className="viz-label">РЕЗУЛЬТАТ / 4 МЕСЯЦА</div><SalesFunnel /><div className="result-strip"><b>×4,7<span>оборот направления</span></b><b>×8,3<span>маржа направления</span></b></div></div>
         </article>
 
-        <article className="case systems reveal">
+        <article className="case systems case-scene case-scene-system reveal">
           <div className="case-copy"><div className="case-no">КЕЙС 02 / 2023—2025</div><p>Интерэстейт / SETEVIE · исполнительный директор</p><h3>Систематизация операционного управления</h3><CaseText task="Обеспечить рост агентства и снизить зависимость ежедневной работы от участия собственника." approach="Управление продуктовой стратегией, бюджетами, P&L, топ-менеджментом и кросс-функциональными командами." solution="Внедрение Битрикс24, 1С, DataLens и AI; настройка процессов и управленческой отчётности; комплектование штата; KPI и OKR; управление тендерами и контрактами." /></div>
           <div className="case-viz"><MotionBackdrop labels={["+71%", "41 ПРОЕКТ", "P&L", "CRM", "5×"]} /><div className="viz-label">РЕЗУЛЬТАТ / 2,5 ГОДА</div><OperationsDashboard /><PuzzleSystem /></div>
         </article>
 
         <div className="case-pair">
-          <article className="compact-case reveal"><MotionBackdrop labels={["×4 ТРАФИК", "×3 ЗАЯВКИ", "÷2 CPO", "×5 КОНТЕНТ"]} /><span>КЕЙС 03 / GARWIN / 2019—2022</span><h3>Маркетинг и PR федерального поставщика</h3><CaseText task="Управлять маркетингом и онлайн-продажами компании с ассортиментом более 100 000 SKU." approach="Многоканальные кампании, медиапланирование, бюджетирование и управление рекламой, PR и производством контента." solution="Сформирована команда; организовано производство контента; настроено управление кампаниями и контроль расходов." /><MarketingDashboard /></article>
-          <article className="compact-case reveal"><MotionBackdrop labels={["+86%", "40 ЛИДОВ", "+150%", "80% МАРЖА"]} /><span>КЕЙС 04 / АЛЬЯНС / 2016—2019</span><h3>Развитие бизнеса и нового направления</h3><CaseText task="Создать стабильный поток клиентов и запустить новое направление юридической компании." approach="Стратегии привлечения, партнёрский маркетинг, корпоративные коммуникации и PR." solution="Партнёрства с Торгово-промышленной палатой, Центром помощи мигрантам и migranto.ru; запуск нового бизнес-юнита." /><GrowthDashboard /></article>
+          <article className="compact-case case-scene case-scene-bars reveal"><MotionBackdrop labels={["×4 ТРАФИК", "×3 ЗАЯВКИ", "÷2 CPO", "×5 КОНТЕНТ"]} /><span>КЕЙС 03 / GARWIN / 2019—2022</span><h3>Маркетинг и PR федерального поставщика</h3><CaseText task="Управлять маркетингом и онлайн-продажами компании с ассортиментом более 100 000 SKU." approach="Многоканальные кампании, медиапланирование, бюджетирование и управление рекламой, PR и производством контента." solution="Сформирована команда; организовано производство контента; настроено управление кампаниями и контроль расходов." /><MarketingDashboard /></article>
+          <article className="compact-case case-scene case-scene-orbit reveal"><MotionBackdrop labels={["+86%", "40 ЛИДОВ", "+150%", "80% МАРЖА"]} /><span>КЕЙС 04 / АЛЬЯНС / 2016—2019</span><h3>Развитие бизнеса и нового направления</h3><CaseText task="Создать стабильный поток клиентов и запустить новое направление юридической компании." approach="Стратегии привлечения, партнёрский маркетинг, корпоративные коммуникации и PR." solution="Партнёрства с Торгово-промышленной палатой, Центром помощи мигрантам и migranto.ru; запуск нового бизнес-юнита." /><GrowthDashboard /></article>
         </div>
       </section>
 
