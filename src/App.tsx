@@ -1,400 +1,176 @@
 import { useEffect, useState } from "react";
 
-const clients = [
-  "A101",
-  "ФК ЗЕНИТ",
-  "ГАЗПРОМНЕФТЬ",
-  "METRO",
-  "SOKOLOV",
-  "DANONE",
-  "СИБУР",
-  "ЛСР",
-  "LEVEL",
-  "RWB",
-  "АЗБУКА ВКУСА",
+const facts = [
+  { value: "×4,7", label: "оборот направления", note: "за 4 месяца" },
+  { value: "×8,3", label: "маржа направления", note: "за тот же период" },
+  { value: "+71%", label: "выручка агентства", note: "год к году" },
+  { value: "+86%", label: "выручка и прибыль", note: "проект развития" },
 ];
 
-const timeline = [
-  {
-    years: "2026 — н.в.",
-    company: "Медиа Инсайт",
-    role: "Коммерческий директор (CCO)",
-    result: "×4,7 оборот · ×8,3 маржа",
-  },
-  {
-    years: "2023 — 2025",
-    company: "Интерэстейт / SETEVIE",
-    role: "Зам. генерального / исполнительный директор",
-    result: "+71% выручка · +41 проект",
-  },
-  {
-    years: "2019 — 2022",
-    company: "GARWIN",
-    role: "Руководитель маркетинга и PR",
-    result: "×3 сумма заявок · CPO ÷2",
-  },
-  {
-    years: "2016 — 2019",
-    company: "Альянс",
-    role: "Директор по развитию / Head of Growth",
-    result: "+86% выручка и прибыль",
-  },
+const experience = [
+  ["2026 — н.в.", "Медиа Инсайт", "Коммерческий директор (CCO)", "Коммерческая система digital-направления"],
+  ["2023 — 2025", "Интерэстейт / SETEVIE", "Заместитель генерального / исполнительный директор", "P&L, стратегия, процессы, команда"],
+  ["2019 — 2022", "GARWIN", "Руководитель маркетинга и PR", "Маркетинг, PR, лидогенерация"],
+  ["2016 — 2019", "Альянс", "Директор по развитию / Head of Growth", "Новые направления и партнёрства"],
 ];
 
-function Arrow({ diagonal = false }: { diagonal?: boolean }) {
+const education = [
+  ["2026", "Бизнес-анализ", "ASPEX · бизнес-аналитик"],
+  ["2026", "Старт в 1С", "1С · 6 академических часов"],
+  ["2025", "Управление и мотивация команд", "SETTERS"],
+  ["2025", "Re:start. Дао-Перезагрузка", "Ирина Хакамада"],
+  ["2024", "Менторская программа «Новый шаг»", "Forbes Woman · ментор Сколково"],
+  ["2023", "Формула прибыли", "Илья Балахнин"],
+  ["2022", "Директор по маркетингу", "Qmarketing Academy"],
+  ["2022", "Яндекс.Директ", "Электронный сертификат"],
+  ["2019", "Бизнес-школа управления", "Visotsky Consulting Inc."],
+  ["2015", "Высшее образование", "СПбГУП"],
+  ["2010", "Школа журналистики", "СПбГУП"],
+  ["2009", "Малый журфак", "НовГУ им. Ярослава Мудрого"],
+];
+
+function MiniDashboard() {
   return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className={diagonal ? "arrow diagonal" : "arrow"}
-    >
-      <path d="M5 12h13M13 6l6 6-6 6" />
-    </svg>
+    <div className="dashboard" aria-hidden="true">
+      <div className="dash-top">
+        <span>EXECUTIVE CONTROL / 2026</span><i /><i /><i />
+      </div>
+      <div className="dash-chart">
+        <svg viewBox="0 0 600 190" preserveAspectRatio="none">
+          <path className="grid-line" d="M0 35H600M0 80H600M0 125H600M0 170H600" />
+          <path className="trend-shadow" d="M0 164 C70 150 80 155 125 132 S190 129 226 105 S300 104 340 75 S415 85 455 54 S530 55 600 16" />
+          <path className="trend" d="M0 164 C70 150 80 155 125 132 S190 129 226 105 S300 104 340 75 S415 85 455 54 S530 55 600 16" />
+        </svg>
+        <span className="dash-caption">DYNAMICS</span>
+      </div>
+      <div className="dash-flow">
+        <div><b>01</b><span>LEAD</span></div><i /><div><b>02</b><span>QUALIFY</span></div><i /><div><b>03</b><span>DEAL</span></div>
+      </div>
+      <div className="dash-table">
+        {["SALES", "MARKETING", "OPERATIONS", "TEAM"].map((item, i) => (
+          <div key={item}><span>{item}</span><i style={{ width: `${52 + i * 12}%` }} /><b>{i + 1}/4</b></div>
+        ))}
+      </div>
+      <div className="dash-nodes"><i /><i /><i /><i /><span /></div>
+    </div>
   );
 }
 
-export default function Home() {
+function Funnel() {
+  return (
+    <div className="funnel" aria-hidden="true">
+      <div className="funnel-ring r1"><i /><i /><i /><i /></div>
+      <div className="funnel-ring r2"><i /><i /><i /></div>
+      <div className="funnel-ring r3"><i /><i /></div>
+      <div className="funnel-core" />
+      <span className="funnel-out" />
+    </div>
+  );
+}
+
+function PuzzleSystem() {
+  return (
+    <div className="puzzle-system" aria-hidden="true">
+      {Array.from({ length: 9 }).map((_, i) => <i key={i} style={{ "--n": i } as React.CSSProperties} />)}
+      <div className="system-axis"><span>CRM</span><span>1С</span><span>BI</span><span>AI</span></div>
+    </div>
+  );
+}
+
+export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const updateProgress = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      setProgress(max ? scrollY / max : 0);
+      document.documentElement.style.setProperty("--scroll", String(scrollY));
     };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("is-visible");
-        });
-      },
-      { threshold: 0.14 },
-    );
-
-    document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    updateProgress();
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", updateProgress);
-    };
+    const observer = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")), { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => { removeEventListener("scroll", onScroll); observer.disconnect(); };
   }, []);
-
-  const closeMenu = () => setMenuOpen(false);
 
   return (
     <main>
-      <div className="scroll-progress" style={{ width: `${progress}%` }} />
-
-      <header className="site-header">
-        <a className="monogram" href="#top" aria-label="В начало страницы">
-          AV<span>®</span>
-        </a>
-        <nav className={menuOpen ? "main-nav open" : "main-nav"} aria-label="Основная навигация">
-          <a href="#impact" onClick={closeMenu}>Результаты</a>
-          <a href="#cases" onClick={closeMenu}>Кейсы</a>
-          <a href="#experience" onClick={closeMenu}>Опыт</a>
-          <a href="#about" onClick={closeMenu}>Обо мне</a>
+      <div className="progress" style={{ transform: `scaleX(${progress})` }} />
+      <header>
+        <a className="brand" href="#top">AV<span>/ CCO</span></a>
+        <nav className={menuOpen ? "open" : ""}>
+          <a href="#facts">Факты</a><a href="#cases">Кейсы</a><a href="#career">Опыт</a><a href="#education">Образование</a>
         </nav>
-        <a className="header-cta" href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer">
-          Связаться <span>↗</span>
-        </a>
-        <button
-          className="menu-button"
-          type="button"
-          aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((value) => !value)}
-        >
-          <span />
-          <span />
-        </button>
+        <a className="contact-link" href="mailto:alinavasileva.jour@gmail.com">Контакты ↗</a>
+        <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Меню"><i /><i /></button>
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-orb hero-orb-one" />
-        <div className="hero-orb hero-orb-two" />
-        <img className="hero-liquid" src="assets/hero-liquid.webp" alt="Абстрактная стеклянная форма — метафора роста" />
-
-        <div className="hero-kicker reveal">
-          <span className="status-dot" />
-          CCO · Business Development · Санкт-Петербург
+        <MiniDashboard />
+        <div className="hero-copy reveal">
+          <p className="index">EXECUTIVE PORTFOLIO / 2026</p>
+          <h1>Алина<br/><span>Васильева</span></h1>
+          <h2>CCO / COO</h2>
+          <div className="hero-fact"><strong>12 лет</strong><span>в управлении</span></div>
+          <div className="hero-links"><a href="#cases">Кейсы ↓</a><a href="alina-vasileva-resume.pdf" download>Резюме PDF ↓</a></div>
         </div>
-
-        <div className="hero-copy">
-          <p className="eyebrow reveal">Алина Васильева · Executive portfolio / 2026</p>
-          <h1 className="reveal">
-            Создаю системы,
-            <span>которые растут.</span>
-          </h1>
-          <p className="hero-lead reveal">
-            Коммерческий директор, операционный лидер и growth‑стратег. Соединяю продажи,
-            маркетинг, процессы и людей в предсказуемый бизнес‑результат.
-          </p>
-          <div className="hero-actions reveal">
-            <a className="button button-dark" href="#cases">
-              Смотреть кейсы <Arrow />
-            </a>
-            <a className="button button-light" href="alina-vasileva-resume.pdf" download>
-              Резюме, PDF <span className="download-icon">↓</span>
-            </a>
-          </div>
-        </div>
-
-        <div className="portrait-card reveal">
+        <div className="portrait reveal">
           <img src="assets/alina-portrait.jpg" alt="Алина Васильева" />
-          <div>
-            <strong>9 лет</strong>
-            <span>в росте, маркетинге и коммерции</span>
-          </div>
         </div>
+        <div className="location">САНКТ-ПЕТЕРБУРГ · ГОТОВА К КОМАНДИРОВКАМ</div>
+        <div className="scroll-cue"><span /> SCROLL</div>
+      </section>
 
-        <div className="hero-footnote">
-          <span>SCROLL TO EXPLORE</span>
-          <span className="scroll-line" />
-          <span>55°45′ N · 37°37′ E</span>
+      <section className="facts section" id="facts">
+        <div className="section-head reveal"><span>01 / ФАКТЫ</span><h2>Измеримые<br/>результаты.</h2><p>Данные из резюме и реализованных проектов.</p></div>
+        <div className="fact-grid">
+          {facts.map((fact, i) => <article className="fact reveal" key={fact.value}><span>0{i + 1}</span><strong>{fact.value}</strong><h3>{fact.label}</h3><p>{fact.note}</p><i /></article>)}
+        </div>
+        <div className="control-table reveal">
+          <div className="table-title"><span>УПРАВЛЕНЧЕСКИЙ КОНТУР</span><b>STATUS / ACTIVE</b></div>
+          {["Стратегия и P&L", "Продажи и лидогенерация", "Маркетинг и PR", "Процессы и автоматизация", "Команда и мотивация"].map((item, i) => <div className="table-row" key={item}><span>0{i + 1}</span><strong>{item}</strong><i><b style={{ width: `${74 + i * 4}%` }} /></i><em>CONTROLLED</em></div>)}
         </div>
       </section>
 
-      <section className="statement section-pad">
-        <div className="section-label reveal"><span>01</span> Мой фокус</div>
-        <div className="statement-copy reveal">
-          <p>Я прихожу туда, где амбиции уже большие,</p>
-          <h2>
-            а системе нужно
-            <em>успеть за ними.</em>
-          </h2>
-        </div>
-        <p className="statement-note reveal">
-          Не «управляю функцией», а собираю работающую конструкцию: стратегия → команда →
-          воронка → экономика → результат.
-        </p>
-      </section>
+      <section className="cases section" id="cases">
+        <div className="section-head reveal"><span>02 / КЕЙСЫ</span><h2>Задача.<br/>Система. Результат.</h2><p>Без оценочных формулировок. Только контекст, действия и показатели.</p></div>
 
-      <section className="impact" id="impact">
-        <div className="impact-glow" />
-        <div className="section-pad impact-inner">
-          <div className="section-label light reveal"><span>02</span> Impact</div>
-          <div className="impact-heading reveal">
-            <p>Результат — не обещание.</p>
-            <h2>Это цифры.</h2>
-          </div>
-
-          <div className="metric-grid">
-            <article className="metric reveal">
-              <span>01 / Оборот</span>
-              <strong>×4,7</strong>
-              <p>рост направления за 4 месяца</p>
-            </article>
-            <article className="metric reveal">
-              <span>02 / Маржа</span>
-              <strong>×8,3</strong>
-              <p>рост за тот же период</p>
-            </article>
-            <article className="metric reveal lime">
-              <span>03 / Выручка</span>
-              <strong>+71%</strong>
-              <p>годовая динамика агентства</p>
-            </article>
-            <article className="metric reveal">
-              <span>04 / Growth</span>
-              <strong>+86%</strong>
-              <p>выручка и прибыль бизнеса</p>
-            </article>
-          </div>
-
-          <div className="clients-row reveal" aria-label="Клиенты и бренды">
-            <span>Портфель /</span>
-            <div className="marquee">
-              <div className="marquee-track">
-                {[...clients, ...clients].map((client, index) => (
-                  <b key={`${client}-${index}`}>{client}</b>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cases section-pad" id="cases">
-        <div className="cases-head reveal">
-          <div className="section-label"><span>03</span> Избранные кейсы</div>
-          <h2>Рост — это<br /><i>спроектированный</i> результат.</h2>
-          <p>Три контекста. Одна логика: найти точку роста, собрать систему, довести до цифр.</p>
-        </div>
-
-        <article className="case case-dark reveal">
-          <div className="case-copy">
-            <div className="case-meta">
-              <span>CASE 01</span><span>2026 — н.в.</span>
-            </div>
-            <div>
-              <p className="case-company">Медиа Инсайт · CCO</p>
-              <h3>Коммерческое ускорение за 4 месяца.</h3>
-              <p className="case-description">
-                Пересобрала коммерческое управление digital‑направлением: лидогенерацию,
-                квалификацию, пресейл, тендеры, переговоры и запуск проектов.
-              </p>
-            </div>
-            <div className="case-facts">
-              <div><strong>69</strong><span>квалифицированных встреч</span></div>
-              <div><strong>40+</strong><span>коммерческих предложений</span></div>
-              <div><strong>22,5%</strong><span>КП → сделка</span></div>
-              <div><strong>8 / 2</strong><span>запусков / победы в тендерах</span></div>
-            </div>
-          </div>
-          <div className="case-visual dark-visual">
-            <img src="assets/case-growth.webp" alt="Абстрактная визуализация коммерческого роста" />
-            <div className="case-badge">×8,3 <span>маржа</span></div>
-          </div>
+        <article className="case commercial reveal">
+          <div className="case-copy"><div className="case-no">CASE 01 / 2026</div><p>Медиа Инсайт · коммерческий директор</p><h3>Пересборка коммерческого управления digital-направлением.</h3><ul><li>Лидогенерация и квалификация</li><li>Пресейл, тендеры и переговоры</li><li>Запуск проектов и контроль маржи</li></ul><div className="case-metrics"><b>69<span>встреч</span></b><b>40+<span>КП</span></b><b>22,5%<span>КП → сделка</span></b><b>8 / 2<span>запуски / тендеры</span></b></div></div>
+          <div className="case-viz"><div className="viz-label">SALES PIPELINE / LIVE</div><Funnel /><div className="funnel-legend"><span>INPUT</span><span>QUALIFY</span><span>OUTPUT</span></div></div>
         </article>
 
-        <article className="case case-pale reveal">
-          <div className="case-copy">
-            <div className="case-meta">
-              <span>CASE 02</span><span>2023 — 2025</span>
-            </div>
-            <div>
-              <p className="case-company">Интерэстейт / SETEVIE · Executive director</p>
-              <h3>Из агентства — в управляемую бизнес‑систему.</h3>
-              <p className="case-description">
-                Стратегия продуктовых направлений, P&amp;L, кросс‑функциональная команда,
-                CRM, 1С, DataLens и AI. Собственник вышел из большей части операционных задач.
-              </p>
-            </div>
-            <div className="case-facts">
-              <div><strong>+71%</strong><span>динамика выручки</span></div>
-              <div><strong>+41</strong><span>новый проект</span></div>
-              <div><strong>5×</strong><span>меньше операционки собственника</span></div>
-              <div><strong>C‑level</strong><span>защиты и контракты</span></div>
-            </div>
-          </div>
-          <div className="case-visual pale-visual">
-            <img src="assets/case-systems.webp" alt="Абстрактная визуализация бизнес-системы" />
-            <div className="system-tags">
-              <span>CRM</span><span>1С</span><span>BI</span><span>AI</span>
-            </div>
-          </div>
+        <article className="case systems reveal">
+          <div className="case-copy"><div className="case-no">CASE 02 / 2023—2025</div><p>Интерэстейт / SETEVIE · исполнительный директор</p><h3>Переход от ручного управления к системе.</h3><ul><li>Стратегия продуктовых направлений и P&L</li><li>Регламенты и кросс-функциональные процессы</li><li>CRM, 1С, DataLens и AI</li></ul><div className="case-metrics"><b>+71%<span>выручка</span></b><b>41<span>проект</span></b><b>5×<span>меньше операционки</span></b></div></div>
+          <div className="case-viz"><div className="viz-label">OPERATING SYSTEM / ASSEMBLY</div><PuzzleSystem /></div>
         </article>
 
-        <div className="split-cases">
-          <article className="mini-case reveal">
-            <div className="case-meta"><span>CASE 03</span><span>2019 — 2022</span></div>
-            <p>GARWIN · Head of Marketing &amp; PR</p>
-            <h3>×4 трафик.<br />CPO в 2 раза ниже.</h3>
-            <div className="mini-graph" aria-hidden="true">
-              <i style={{ height: "28%" }} /><i style={{ height: "42%" }} /><i style={{ height: "61%" }} /><i style={{ height: "88%" }} />
-            </div>
-            <span>Сумма заявок выросла в 3 раза за 9 месяцев</span>
-          </article>
-          <article className="mini-case mini-case-accent reveal">
-            <div className="case-meta"><span>CASE 04</span><span>2016 — 2019</span></div>
-            <p>Альянс · Head of Growth</p>
-            <h3>Новый бизнес‑юнит<br />с маржинальностью 80%.</h3>
-            <div className="orbit" aria-hidden="true"><i /><i /><b>+86%</b></div>
-            <span>Рост выручки и прибыли компании</span>
-          </article>
+        <div className="case-pair">
+          <article className="compact-case reveal"><span>CASE 03 / GARWIN</span><h3>Маркетинг и PR</h3><div className="bar-chart"><i/><i/><i/><i/><i/></div><dl><div><dt>×4</dt><dd>трафик</dd></div><div><dt>×3</dt><dd>сумма заявок</dd></div><div><dt>÷2</dt><dd>CPO</dd></div></dl></article>
+          <article className="compact-case reveal"><span>CASE 04 / АЛЬЯНС</span><h3>Новое направление</h3><div className="line-chart"><svg viewBox="0 0 500 160"><path d="M0 145 C80 135 95 120 150 125 S245 105 290 78 S380 66 500 15"/></svg></div><dl><div><dt>+86%</dt><dd>выручка и прибыль</dd></div><div><dt>80%</dt><dd>маржинальность юнита</dd></div></dl></article>
         </div>
       </section>
 
-      <section className="experience" id="experience">
-        <div className="kinetic-line" aria-hidden="true">BUSINESS · GROWTH · OPERATIONS ·</div>
-        <div className="section-pad experience-inner">
-          <div className="section-label light reveal"><span>04</span> Карьера</div>
-          <div className="experience-title reveal">
-            <h2>Четыре этапа.<br />Одна траектория — <i>вверх.</i></h2>
-            <p>Business development → marketing → operations → CCO</p>
-          </div>
-          <div className="timeline">
-            {timeline.map((item, index) => (
-              <article className="timeline-item reveal" key={item.company}>
-                <div className="timeline-index">0{index + 1}</div>
-                <time>{item.years}</time>
-                <h3>{item.company}</h3>
-                <p>{item.role}</p>
-                <strong>{item.result}</strong>
-              </article>
-            ))}
-          </div>
+      <section className="career section" id="career">
+        <div className="section-head reveal"><span>03 / ОПЫТ</span><h2>2016—2026.</h2><p>Развитие бизнеса → маркетинг → операционное управление → CCO.</p></div>
+        <div className="career-table">
+          {experience.map((row, i) => <article className="career-row reveal" key={row[1]}><span>0{i + 1}</span><time>{row[0]}</time><h3>{row[1]}</h3><p>{row[2]}</p><b>{row[3]}</b></article>)}
         </div>
       </section>
 
-      <section className="method section-pad">
-        <div className="section-label reveal"><span>05</span> Как я работаю</div>
-        <div className="method-grid">
-          <div className="method-intro reveal">
-            <h2>Вижу бизнес<br />целиком.</h2>
-            <p>Не отделяю коммерцию от продукта, процессы от людей, а стратегию от P&amp;L.</p>
-          </div>
-          <article className="method-card method-card-wide reveal">
-            <span>01</span>
-            <h3>Диагностирую</h3>
-            <p>Воронка, экономика, продукт, клиентский путь, ограничения команды и процессов.</p>
-            <div className="scan-lines" aria-hidden="true" />
-          </article>
-          <article className="method-card dark reveal">
-            <span>02</span>
-            <h3>Проектирую</h3>
-            <p>Стратегия, целевая модель, роли, KPI / OKR, ритм управления и точки контроля.</p>
-            <div className="node-map" aria-hidden="true"><i /><i /><i /><i /></div>
-          </article>
-          <article className="method-card lime-card reveal">
-            <span>03</span>
-            <h3>Запускаю</h3>
-            <p>Собираю команду, синхронизирую функции и довожу решения до работающей практики.</p>
-            <Arrow diagonal />
-          </article>
-          <article className="method-card method-card-wide reveal">
-            <span>04</span>
-            <h3>Масштабирую</h3>
-            <p>Автоматизация, CRM / ERP / BI / AI, прозрачная управленческая отчетность.</p>
-            <div className="scale-number">×5</div>
-          </article>
+      <section className="education section" id="education">
+        <div className="section-head reveal"><span>04 / ОБРАЗОВАНИЕ</span><h2>Управление.<br/>Аналитика. Маркетинг.</h2><p>Высшее образование и программы повышения квалификации.</p></div>
+        <div className="edu-grid">
+          {education.map((row, i) => <article className="edu reveal" key={`${row[0]}-${row[1]}`}><span>{String(i + 1).padStart(2, "0")}</span><time>{row[0]}</time><h3>{row[1]}</h3><p>{row[2]}</p><i>↗</i></article>)}
         </div>
-      </section>
-
-      <section className="about section-pad" id="about">
-        <div className="about-photo reveal">
-          <img src="assets/alina-portrait.jpg" alt="Портрет Алины Васильевой" />
-          <span>Санкт-Петербург · готова к командировкам</span>
-        </div>
-        <div className="about-copy">
-          <div className="section-label reveal"><span>06</span> За цифрами</div>
-          <h2 className="reveal">Моя суперсила —<br /><i>продавать идеи</i> и собирать людей вокруг них.</h2>
-          <p className="reveal">
-            Я лидер‑стратег и кризис‑менеджер. Люблю динамику, сложные переговоры и задачи,
-            в которых нужно не поддерживать статус‑кво, а менять систему.
-          </p>
-          <div className="about-quote reveal">
-            <span>—</span>
-            <p>«Создала уникальный продукт и сделала из этого бизнес»</p>
-          </div>
-          <div className="interest-row reveal">
-            <span>Хайкинг</span><span>Японизм</span><span>AI</span><span>Путь Сантьяго</span>
-          </div>
-        </div>
+        <div className="certificate-strip reveal"><span>ПОДТВЕРЖДЕНИЯ</span><div><b>ASPEX TECH CAMP</b><small>Business Analyst · 2026</small></div><div><b>1С-ОБРАЗОВАНИЕ</b><small>Старт в 1С · № DK387416</small></div><div><b>ЯНДЕКС.ДИРЕКТ</b><small>Электронный сертификат · 2022</small></div></div>
       </section>
 
       <section className="contact" id="contact">
-        <div className="contact-orb" />
-        <div className="contact-copy reveal">
-          <p>Открыта к сильным бизнес‑задачам</p>
-          <h2>Давайте создавать<br />рост <i>вместе.</i></h2>
-          <div className="contact-actions">
-            <a className="button button-dark" href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer">
-              Написать в Telegram <Arrow diagonal />
-            </a>
-            <a className="text-link" href="mailto:alinavasileva.jour@gmail.com">alinavasileva.jour@gmail.com <span>↗</span></a>
-            <a className="text-link" href="alina-vasileva-resume.pdf" download>Скачать полное резюме <span>↓</span></a>
-          </div>
-        </div>
-        <footer>
-          <div className="monogram footer-logo">AV<span>®</span></div>
-          <p>Коммерческий директор · Head of Business Development</p>
-          <p>© 2026 Алина Васильева · alinavasileva.jour@gmail.com</p>
-        </footer>
+        <div className="contact-dashboard" aria-hidden="true"><MiniDashboard /></div>
+        <div className="contact-copy reveal"><span>05 / КОНТАКТЫ</span><h2>Алина<br/>Васильева.</h2><p>Коммерческий директор · CCO · COO</p><div><a href="mailto:alinavasileva.jour@gmail.com">alinavasileva.jour@gmail.com ↗</a><a href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer">Telegram ↗</a><a href="alina-vasileva-resume.pdf" download>Резюме PDF ↓</a></div></div>
+        <footer><span>Санкт-Петербург · 2026</span><span>12 лет в управлении</span><span>© Алина Васильева</span></footer>
       </section>
     </main>
   );
