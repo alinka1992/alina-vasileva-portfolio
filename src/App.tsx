@@ -29,6 +29,8 @@ const education = [
   ["2009", "Малый журфак", "НовГУ им. Ярослава Мудрого"],
 ];
 
+const courseColors = ["#f52c85", "#1accc9", "#ff8020", "#7d5cdd", "#70cdb0", "#ff4f64"];
+
 const managementAreas = [
   ["Стратегия и P&L", "Планирование · бюджетирование · юнит-экономика · управленческая отчётность"],
   ["Коммерческое управление", "Продажи · лидогенерация · пресейл · тендеры · переговоры"],
@@ -146,10 +148,11 @@ function MotionBackdrop({ labels }: { labels: string[] }) {
 
 function LearningCube({ active }: { active: number }) {
   const cells = Array.from({ length: 9 });
+  const color = courseColors[active % courseColors.length];
   return (
     <div className="learning-cube-wrap" aria-hidden="true">
       <div className="cube-caption"><span>ОБУЧЕНИЕ / 2009—2026</span><b>{String(active + 1).padStart(2, "0")}</b></div>
-      <div className="learning-cube" style={{ "--course": active } as React.CSSProperties}>
+      <div className="learning-cube" style={{ "--course": active, "--course-color": color } as React.CSSProperties}>
         {["front", "right", "top"].map((face, faceIndex) => (
           <div className={`cube-face cube-${face}`} key={face}>
             {cells.map((_, cellIndex) => {
@@ -285,6 +288,7 @@ function ScrollCasePrelude() {
       const distance = Math.max(scene.offsetHeight - innerHeight, 1);
       const value = Math.min(1, Math.max(0, -rect.top / distance));
       scene.style.setProperty("--story", value.toFixed(4));
+      scene.dataset.phase = value < .3 ? "dashboard" : value < .68 ? "tablet" : "copy";
     };
     update();
     addEventListener("scroll", update, { passive: true });
@@ -296,7 +300,7 @@ function ScrollCasePrelude() {
   }, []);
 
   return (
-    <div className="case-prelude" ref={sceneRef} aria-label="Переход к кейсам">
+    <div className="case-prelude" ref={sceneRef} data-phase="dashboard" aria-label="Переход к кейсам">
       <div className="prelude-sticky">
         <div className="prelude-glow" />
         <div className="prelude-dashboard">
@@ -405,7 +409,7 @@ export default function App() {
         <div className="section-head reveal"><span>04 / ОБРАЗОВАНИЕ</span><h2>Образование<br/>и программы</h2><p>Высшее образование и дополнительное обучение.</p></div>
         <div className="education-layout">
         <div className="edu-grid">
-          {education.map((row, i) => <article className={`edu reveal ${activeCourse === i ? "active" : ""}`} tabIndex={0} onMouseEnter={() => setActiveCourse(i)} onFocus={() => setActiveCourse(i)} onClick={() => setActiveCourse(i)} key={`${row[0]}-${row[1]}`}><span>{String(i + 1).padStart(2, "0")}</span><time>{row[0]}</time><h3>{row[1]}</h3><p>{row[2]}</p><i>↗</i></article>)}
+          {education.map((row, i) => <article className={`edu reveal ${activeCourse === i ? "active" : ""}`} style={{ "--course-color": courseColors[i % courseColors.length] } as React.CSSProperties} tabIndex={0} onMouseEnter={() => setActiveCourse(i)} onFocus={() => setActiveCourse(i)} onClick={() => setActiveCourse(i)} key={`${row[0]}-${row[1]}`}><span>{String(i + 1).padStart(2, "0")}</span><time>{row[0]}</time><h3>{row[1]}</h3><p>{row[2]}</p><i>↗</i></article>)}
         </div>
         <LearningCube active={activeCourse} />
         </div>
