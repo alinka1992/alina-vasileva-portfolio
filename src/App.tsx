@@ -2,73 +2,45 @@ import { useEffect, useRef, useState } from "react";
 
 type CaseItem = {
   title: string;
-  company: string;
-  lead: string;
+  context: string;
   task: string;
   approach: string;
   solution: string;
   scene: "scale" | "profit" | "shop" | "product";
-  metrics: Array<{ value: string; label: string }>;
 };
 
 const cases: CaseItem[] = [
   {
     title: "Масштабирование направления",
-    company: "операционное управление",
-    lead: "+71% рост выручки год к году",
+    context: "операционное управление",
     task: "Увеличить объём направления и сделать процессы управляемыми.",
     approach: "Связать продажи, проекты, отчётность и автоматизацию в один контур.",
-    solution: "Настроены процессы в Битрикс24, 1С, DataLens и AI. Контур управления переведён в дашборды и регулярный контроль.",
+    solution: "Настроены CRM, 1С, BI-отчётность и AI-инструменты. Регулярное управление переведено в дашборды.",
     scene: "scale",
-    metrics: [
-      { value: "+71%", label: "рост выручки год к году" },
-      { value: "41", label: "новый проект" },
-      { value: "Битрикс24 · 1С · DataLens · AI", label: "автоматизация процессов" },
-    ],
   },
   {
     title: "Рост прибыли",
-    company: "коммерческое управление",
-    lead: "×4,7 оборот направления",
+    context: "коммерческое управление",
     task: "Усилить коммерческий результат направления и довести сделки до запуска.",
     approach: "Управление пресейлом, КП, тендерами, прогнозом оборота и маржинальной прибыли.",
-    solution: "Собран коммерческий дашборд: рост оборота, маржинальная прибыль, проектные запуски, тендерные победы и сумма КП.",
+    solution: "Собран коммерческий дашборд по обороту, маржинальной прибыли, проектным запускам, тендерам и КП.",
     scene: "profit",
-    metrics: [
-      { value: "×4,7", label: "оборот направления" },
-      { value: "×8,3", label: "маржинальная прибыль направления" },
-      { value: "8", label: "проектных запусков" },
-      { value: "2", label: "тендерные победы" },
-      { value: "40+ млн ₽", label: "коммерческих предложений" },
-    ],
   },
   {
     title: "Увеличение продаж интернет-магазина",
-    company: "маркетинг / сайт / контент",
-    lead: "×3 заявки в интернет‑магазин",
+    context: "маркетинг / сайт / контент",
     task: "Увеличить поток заявок и повысить эффективность сайта и контент‑производства.",
     approach: "Работа с сайтом, контентным циклом, рекламными материалами и аналитикой результата.",
     solution: "Усилены посадочные страницы, ускорено производство контента, выстроена связка «контент → сайт → заявка».",
     scene: "shop",
-    metrics: [
-      { value: "×3", label: "заявки в интернет-магазин за год" },
-      { value: "×5", label: "производство контента" },
-      { value: "0,4 → 0,86", label: "конверсия сайта" },
-    ],
   },
   {
     title: "Создание продукта с 0",
-    company: "новый бизнес‑юнит",
-    lead: "80+% маржинальность",
+    context: "новый бизнес-юнит",
     task: "Запустить самостоятельный продуктовый юнит с понятной экономикой.",
     approach: "Сформировать продукт, упаковку, каналы входящего спроса и коммерческую модель без рекламной зависимости.",
     solution: "Создан отдельный продуктовый модуль. Настроен поток лидов и экономика с высокой маржинальностью.",
     scene: "product",
-    metrics: [
-      { value: "80+%", label: "маржинальность" },
-      { value: "40", label: "лидов в месяц" },
-      { value: "0 ₽", label: "рекламных вложений" },
-    ],
   },
 ];
 
@@ -80,17 +52,17 @@ const experience = [
 ];
 
 const education = [
-  ["2026", "Бизнес-анализ", "ASPEX · бизнес-аналитик"],
-  ["2026", "Старт в 1С", "1С · 6 академических часов"],
-  ["2025", "Управление и мотивация команд", "SETTERS"],
-  ["2025", "Re:start. Дао-Перезагрузка", "Ирина Хакамада"],
-  ["2024", "Менторская программа «Новый шаг»", "Forbes Woman · ментор Сколково"],
-  ["2023", "Формула прибыли", "Илья Балахнин"],
-  ["2022", "Директор по маркетингу", "Qmarketing Academy"],
-  ["2019", "Бизнес-школа управления", "Visotsky Consulting Inc."],
-  ["2015", "Высшее образование", "СПбГУП"],
-  ["2010", "Школа журналистики", "СПбГУП"],
-  ["2009", "Малый журфак", "НовГУ им. Ярослава Мудрого"],
+  { year: "2026", title: "Бизнес-анализ", source: "ASPEX · бизнес-аналитик", level: 11 },
+  { year: "2026", title: "Старт в 1С", source: "1С · 6 академических часов", level: 10 },
+  { year: "2025", title: "Управление и мотивация команд", source: "SETTERS", level: 9 },
+  { year: "2025", title: "Re:start. Дао-Перезагрузка", source: "Ирина Хакамада", level: 8 },
+  { year: "2024", title: "Менторская программа «Новый шаг»", source: "Forbes Woman · ментор Сколково", level: 7 },
+  { year: "2023", title: "Формула прибыли", source: "Илья Балахнин", level: 6 },
+  { year: "2022", title: "Директор по маркетингу", source: "Qmarketing Academy", level: 5 },
+  { year: "2019", title: "Бизнес-школа управления", source: "Visotsky Consulting Inc.", level: 4 },
+  { year: "2015", title: "Высшее образование", source: "СПбГУП", level: 3 },
+  { year: "2010", title: "Школа журналистики", source: "СПбГУП", level: 2 },
+  { year: "2009", title: "Малый журфак", source: "НовГУ им. Ярослава Мудрого", level: 1 },
 ];
 
 function useScrollProgress() {
@@ -144,106 +116,15 @@ function HeroDashboard() {
 }
 
 function CaseScene({ type }: { type: CaseItem["scene"] }) {
-  if (type === "scale") {
-    return (
-      <div className="scene scene-scale">
-        <div className="hands-bridge" aria-hidden="true">
-          <svg className="robot-hand" viewBox="0 0 320 170">
-            <path d="M12 120 C62 92 95 88 132 84" />
-            <path d="M130 84 C158 82 178 78 202 64" />
-            <path d="M202 64 C226 50 250 48 284 55" />
-            <path d="M146 82 L172 114" />
-            <path d="M166 78 L198 108" />
-            <path d="M186 70 L224 96" />
-            <circle cx="134" cy="84" r="12" />
-            <circle cx="202" cy="64" r="9" />
-          </svg>
-          <span />
-          <svg className="human-hand" viewBox="0 0 320 170">
-            <path d="M308 116 C250 88 218 84 184 82" />
-            <path d="M186 82 C158 80 135 76 112 62" />
-            <path d="M112 62 C88 48 62 46 28 55" />
-            <path d="M174 80 L146 112" />
-            <path d="M154 76 L122 106" />
-            <path d="M132 70 L94 96" />
-          </svg>
-        </div>
-        <svg className="scene-curve" viewBox="0 0 650 360">
-          <path d="M24 310 C110 294 145 258 198 248 S302 190 360 158 450 128 508 74 590 48 630 22" />
-        </svg>
-        <div className="system-board">
-          {["Битрикс24", "1С", "DataLens", "AI"].map((item, index) => <span key={item} style={{ "--i": index } as React.CSSProperties}>{item}</span>)}
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "profit") {
-    return (
-      <div className="scene scene-profit">
-        <div className="stairs">
-          {Array.from({ length: 7 }).map((_, index) => <i key={index} style={{ "--i": index } as React.CSSProperties}><b>₽</b></i>)}
-        </div>
-        <svg className="stair-line" viewBox="0 0 620 420">
-          <path d="M20 390 L88 345 L150 300 L218 245 L292 208 L358 155 L448 112 L595 28" />
-        </svg>
-      </div>
-    );
-  }
-
-  if (type === "shop") {
-    return (
-      <div className="scene scene-shop">
-        <div className="site-frame">
-          <i />
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className="content-strip">
-          {Array.from({ length: 5 }).map((_, index) => <span key={index} style={{ "--i": index } as React.CSSProperties} />)}
-        </div>
-        <div className="order-pulses">
-          <b />
-          <b />
-          <b />
-        </div>
-        <svg className="conversion-path" viewBox="0 0 620 260">
-          <path d="M28 210 C120 190 150 166 218 156 S342 118 404 86 514 66 592 22" />
-        </svg>
-      </div>
-    );
-  }
-
+  const source = {
+    scale: "assets/case-scale-dashboard.svg",
+    profit: "assets/case-profit-dashboard.svg",
+    shop: "assets/case-shop-dashboard.svg",
+    product: "assets/case-product-dashboard.svg",
+  }[type];
   return (
-    <div className="scene scene-product">
-      <div className="product-core">
-        <i />
-        <i />
-        <i />
-      </div>
-      <div className="lead-orbit">
-        {Array.from({ length: 12 }).map((_, index) => <span key={index} style={{ "--i": index } as React.CSSProperties} />)}
-      </div>
-      <div className="product-stack">
-        <span>IDEA</span>
-        <span>MVP</span>
-        <span>SALES</span>
-        <span>UNIT</span>
-      </div>
-    </div>
-  );
-}
-
-function MetricList({ metrics }: { metrics: CaseItem["metrics"] }) {
-  return (
-    <div className="metrics">
-      {metrics.map((metric, index) => (
-        <div className="metric" key={`${metric.value}-${metric.label}`} style={{ "--i": index } as React.CSSProperties}>
-          <b>{metric.value}</b>
-          <span>{metric.label}</span>
-        </div>
-      ))}
+    <div className="case-art">
+      <img src={source} alt="" />
     </div>
   );
 }
@@ -252,9 +133,8 @@ function CaseCard({ item }: { item: CaseItem }) {
   return (
     <article className={`case-card case-${item.scene}`}>
       <div className="case-copy">
-        <p>{item.company}</p>
+        <p>{item.context}</p>
         <h3>{item.title}</h3>
-        <strong>{item.lead}</strong>
         <div className="case-logic">
           <div><span>Задача</span><p>{item.task}</p></div>
           <div><span>Подход</span><p>{item.approach}</p></div>
@@ -263,43 +143,30 @@ function CaseCard({ item }: { item: CaseItem }) {
       </div>
       <div className="case-dashboard">
         <CaseScene type={item.scene} />
-        <MetricList metrics={item.metrics} />
       </div>
     </article>
   );
 }
 
-function EducationObject({ active }: { active: number }) {
-  const fill = Math.max(0, Math.min(100, ((active + 1) / education.length) * 100));
+function EducationObject({ level }: { level: number }) {
+  const fill = Math.max(0, Math.min(100, (level / education.length) * 100));
+  const liquidHeight = Math.max(7, Math.min(72, (level / education.length) * 72));
   return (
-    <div className="edu-brain" aria-hidden="true" style={{ "--brain-fill": `${fill}%` } as React.CSSProperties}>
+    <div
+      className="edu-vessel"
+      aria-hidden="true"
+      style={{ "--vessel-fill": `${fill}%`, "--liquid-height": `${liquidHeight}%` } as React.CSSProperties}
+    >
+      <div className="vessel-liquid" />
+      <div className="vessel-glass" />
       {Array.from({ length: education.length }).map((_, index) => (
         <span
           key={index}
-          className={`${index <= active ? "filled" : ""} ${index === active ? "active" : ""}`}
+          className={`${index < level ? "filled" : ""} ${index === level - 1 ? "active" : ""}`}
           style={{ "--i": index } as React.CSSProperties}
         />
       ))}
-      <i />
-    </div>
-  );
-}
-
-function Cursor() {
-  const [point, setPoint] = useState({ x: -100, y: -100 });
-
-  useEffect(() => {
-    const move = (event: MouseEvent) => setPoint({ x: event.clientX, y: event.clientY });
-    window.addEventListener("mousemove", move, { passive: true });
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
-
-  return (
-    <div className="cursor pen-cursor" style={{ transform: `translate3d(${point.x}px, ${point.y}px, 0)` }} aria-hidden="true">
-      <span className="pen-hand" />
-      <span className="pen-body" />
-      <span className="pen-tip" />
-      <i className="pen-line" />
+      <i className="vessel-highlight" />
     </div>
   );
 }
@@ -307,7 +174,7 @@ function Cursor() {
 export default function App() {
   const progress = useScrollProgress();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeCourse, setActiveCourse] = useState(0);
+  const [activeLevel, setActiveLevel] = useState(education[0].level);
   const mainRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -322,7 +189,6 @@ export default function App() {
 
   return (
     <main ref={mainRef}>
-      <Cursor />
       <div className="progress" style={{ transform: `scaleX(${progress})` }} />
 
       <header>
@@ -357,7 +223,7 @@ export default function App() {
       <section className="section cases" id="cases">
         <div className="section-head reveal">
           <span>КЕЙСЫ</span>
-          <h2>Кейсы по завершённым периодам.</h2>
+          <h2>Кейсы</h2>
         </div>
         {cases.map((item) => <CaseCard item={item} key={item.title} />)}
       </section>
@@ -382,23 +248,23 @@ export default function App() {
       <section className="section education" id="education">
         <div className="section-head reveal">
           <span>ОБРАЗОВАНИЕ</span>
-          <h2>Образование и обучение</h2>
+          <h2>Обучение</h2>
         </div>
         <div className="education-layout">
-          <EducationObject active={activeCourse} />
+          <EducationObject level={activeLevel} />
           <div className="edu-list">
             {education.map((row, index) => (
               <article
-                className={activeCourse === index ? "edu active" : "edu"}
-                key={`${row[0]}-${row[1]}`}
-                onMouseEnter={() => setActiveCourse(index)}
-                onFocus={() => setActiveCourse(index)}
-                onClick={() => setActiveCourse(index)}
+                className={activeLevel === row.level ? "edu active" : "edu"}
+                key={`${row.year}-${row.title}`}
+                onMouseEnter={() => setActiveLevel(row.level)}
+                onFocus={() => setActiveLevel(row.level)}
+                onClick={() => setActiveLevel(row.level)}
                 tabIndex={0}
               >
-                <time>{row[0]}</time>
-                <h3>{row[1]}</h3>
-                <p>{row[2]}</p>
+                <time>{row.year}</time>
+                <h3>{row.title}</h3>
+                <p>{row.source}</p>
                 <span>↗</span>
               </article>
             ))}
