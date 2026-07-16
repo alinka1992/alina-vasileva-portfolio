@@ -147,6 +147,27 @@ function CaseScene({ type }: { type: CaseItem["scene"] }) {
   if (type === "scale") {
     return (
       <div className="scene scene-scale">
+        <div className="hands-bridge" aria-hidden="true">
+          <svg className="robot-hand" viewBox="0 0 320 170">
+            <path d="M12 120 C62 92 95 88 132 84" />
+            <path d="M130 84 C158 82 178 78 202 64" />
+            <path d="M202 64 C226 50 250 48 284 55" />
+            <path d="M146 82 L172 114" />
+            <path d="M166 78 L198 108" />
+            <path d="M186 70 L224 96" />
+            <circle cx="134" cy="84" r="12" />
+            <circle cx="202" cy="64" r="9" />
+          </svg>
+          <span />
+          <svg className="human-hand" viewBox="0 0 320 170">
+            <path d="M308 116 C250 88 218 84 184 82" />
+            <path d="M186 82 C158 80 135 76 112 62" />
+            <path d="M112 62 C88 48 62 46 28 55" />
+            <path d="M174 80 L146 112" />
+            <path d="M154 76 L122 106" />
+            <path d="M132 70 L94 96" />
+          </svg>
+        </div>
         <svg className="scene-curve" viewBox="0 0 650 360">
           <path d="M24 310 C110 294 145 258 198 248 S302 190 360 158 450 128 508 74 590 48 630 22" />
         </svg>
@@ -274,9 +295,11 @@ function Cursor() {
   }, []);
 
   return (
-    <div className="cursor" style={{ transform: `translate3d(${point.x}px, ${point.y}px, 0)` }} aria-hidden="true">
-      <span />
-      <i />
+    <div className="cursor pen-cursor" style={{ transform: `translate3d(${point.x}px, ${point.y}px, 0)` }} aria-hidden="true">
+      <span className="pen-hand" />
+      <span className="pen-body" />
+      <span className="pen-tip" />
+      <i className="pen-line" />
     </div>
   );
 }
@@ -331,22 +354,10 @@ export default function App() {
         <div className="location">Санкт-Петербург · готова к командировкам</div>
       </section>
 
-      <section className="section intro">
-        <div className="section-head reveal">
-          <span>ФАКТЫ</span>
-          <h2>Управление коммерцией, процессами и ростом.</h2>
-          <p>Без оценочных формулировок. Только роли, действия и измеримые результаты.</p>
-        </div>
-        <div className="facts-grid">
-          {["Коммерческий контур", "P&L и маржинальность", "CRM / 1С / BI / AI", "Команды и процессы"].map((item) => <span key={item}>{item}</span>)}
-        </div>
-      </section>
-
       <section className="section cases" id="cases">
         <div className="section-head reveal">
           <span>КЕЙСЫ</span>
           <h2>Кейсы по завершённым периодам.</h2>
-          <p>Данные сгруппированы по задаче, подходу, решению и результату.</p>
         </div>
         {cases.map((item) => <CaseCard item={item} key={item.title} />)}
       </section>
@@ -355,7 +366,6 @@ export default function App() {
         <div className="section-head reveal">
           <span>ОПЫТ</span>
           <h2>Опыт работы</h2>
-          <p>Должности и зоны ответственности.</p>
         </div>
         <div className="table">
           {experience.map((row) => (
@@ -373,7 +383,6 @@ export default function App() {
         <div className="section-head reveal">
           <span>ОБРАЗОВАНИЕ</span>
           <h2>Образование и обучение</h2>
-          <p>Каждая строка подсвечивает часть объёмного мозга. Чем выше активный уровень обучения, тем светлее собранный объект.</p>
         </div>
         <div className="education-layout">
           <EducationObject active={activeCourse} />
