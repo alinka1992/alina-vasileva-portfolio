@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 900" role="img" aria-label="Масштабирование направления: рост выручки, новый проект, автоматизация процессов">
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1218"/>
+      <stop offset=".16" stop-color="#ffffff"/>
+      <stop offset=".34" stop-color="#9aa2ad"/>
+      <stop offset=".52" stop-color="#ffffff"/>
+      <stop offset=".72" stop-color="#6d7580"/>
+      <stop offset="1" stop-color="#f9fbff"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#19d8ff"/>
+      <stop offset="1" stop-color="#8ff4ff"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <style>
+      .bg{fill:#f6f8f9}.grid{stroke:#dce4e8;stroke-width:1;opacity:.55}.thin{fill:none;stroke:#a4adb5;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.skin{fill:none;stroke:#9aa2ad;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.blue{stroke:url(#cyan);stroke-width:8;stroke-linecap:round;fill:none;stroke-dasharray:900;animation:draw 4s ease-in-out infinite alternate}.label{font:500 25px Orbitron,Arial,sans-serif;letter-spacing:.12em;fill:#4f5863}.small{font:500 21px Orbitron,Arial,sans-serif;letter-spacing:.1em;fill:#5f6874}.big{font:600 132px Orbitron,Arial,sans-serif;letter-spacing:-.07em;fill:url(#chrome)}.tool{fill:#fff;stroke:#d1d8de;stroke-width:1.4}.float{animation:float 5s ease-in-out infinite}.pulse{animation:pulse 2.6s ease-in-out infinite}.left{animation:leftHand 4s ease-in-out infinite alternate}.right{animation:rightHand 4s ease-in-out infinite alternate}@keyframes draw{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}@keyframes float{50%{transform:translateY(-14px)}}@keyframes pulse{50%{opacity:.35;transform:scale(1.35)}}@keyframes leftHand{from{transform:translateX(-40px)}to{transform:translateX(18px)}}@keyframes rightHand{from{transform:translateX(40px)}to{transform:translateX(-18px)}}
+    </style>
+  </defs>
+  <rect class="bg" width="1100" height="900" rx="46"/>
+  <g opacity=".72">
+    <path class="grid" d="M0 120H1100M0 240H1100M0 360H1100M0 480H1100M0 600H1100M0 720H1100M160 0V900M320 0V900M480 0V900M640 0V900M800 0V900M960 0V900"/>
+  </g>
+  <circle cx="730" cy="156" r="160" fill="#19d8ff" opacity=".13" filter="url(#soft)"/>
+  <circle cx="520" cy="184" r="72" fill="#19d8ff" opacity=".16"/>
+  <line x1="520" y1="82" x2="520" y2="286" stroke="#19d8ff" opacity=".45"/>
+  <line x1="418" y1="184" x2="622" y2="184" stroke="#19d8ff" opacity=".45"/>
+  <circle class="pulse" cx="520" cy="184" r="18" fill="#19d8ff"/>
+
+  <g class="left">
+    <path class="thin" d="M48 245C138 198 192 195 246 188"/>
+    <path class="thin" d="M242 188C285 184 310 170 344 142"/>
+    <path class="thin" d="M344 142C382 112 426 114 480 128"/>
+    <path class="thin" d="M258 188L302 238M292 178L346 222M328 158L390 202"/>
+    <circle cx="246" cy="188" r="18" fill="none" stroke="#a4adb5" stroke-width="5"/>
+    <circle cx="344" cy="142" r="14" fill="none" stroke="#a4adb5" stroke-width="5"/>
+  </g>
+  <g class="right">
+    <path class="skin" d="M1052 245C962 198 908 195 854 188"/>
+    <path class="skin" d="M858 188C815 184 790 170 756 142"/>
+    <path class="skin" d="M756 142C718 112 674 114 620 128"/>
+    <path class="skin" d="M842 188L798 238M808 178L754 222M772 158L710 202"/>
+  </g>
+
+  <path class="blue" d="M98 700C212 675 265 620 350 590S500 508 588 448 770 330 1008 296"/>
+  <text class="big" x="86" y="428">+71%</text>
+  <text class="label" x="96" y="470">РОСТ ВЫРУЧКИ ГОД К ГОДУ</text>
+  <text class="big" x="108" y="765">41</text>
+  <text class="label" x="100" y="812">НОВЫЙ ПРОЕКТ</text>
+  <g transform="translate(490 525)" opacity=".58">
+    <text class="big" font-size="96">Битрикс24</text>
+    <text class="big" x="88" y="114" font-size="96">1C · DataLens</text>
+  </g>
+  <g class="float">
+    <rect class="tool" x="470" y="734" width="126" height="70" rx="22"/>
+    <rect class="tool" x="620" y="734" width="126" height="70" rx="22"/>
+    <rect class="tool" x="770" y="734" width="126" height="70" rx="22"/>
+    <rect class="tool" x="920" y="734" width="126" height="70" rx="22"/>
+    <text class="small" x="495" y="778">Битрикс24</text>
+    <text class="small" x="668" y="778">1С</text>
+    <text class="small" x="798" y="778">DataLens</text>
+    <text class="small" x="958" y="778">AI</text>
+  </g>
+</svg>
