@@ -1,34 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 900" role="img" aria-label="Рост прибыли: оборот, маржинальная прибыль, запуски, тендеры и КП">
-  <defs>
-    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111318"/><stop offset=".18" stop-color="#fff"/><stop offset=".38" stop-color="#9da5af"/><stop offset=".56" stop-color="#fff"/><stop offset=".76" stop-color="#717985"/><stop offset="1" stop-color="#f8fbff"/></linearGradient>
-    <linearGradient id="cyan" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#19d8ff"/><stop offset="1" stop-color="#7df2ff"/></linearGradient>
-    <filter id="glow"><feGaussianBlur stdDeviation="18"/></filter>
-    <style>
-      .bg{fill:#f7f9fa}.grid{stroke:#dce4e8;opacity:.56}.big{font:600 112px Orbitron,Arial,sans-serif;letter-spacing:-.06em;fill:url(#chrome)}.huge{font:600 154px Orbitron,Arial,sans-serif;letter-spacing:-.08em;fill:url(#chrome)}.label{font:500 22px Orbitron,Arial,sans-serif;letter-spacing:.12em;fill:#4c5660}.step{fill:url(#chrome);stroke:#fff;stroke-width:1.6;filter:drop-shadow(0 22px 32px rgba(45,55,65,.16));animation:rise 3.8s ease-in-out infinite alternate}.coin{fill:url(#chrome);filter:drop-shadow(0 12px 18px rgba(45,55,65,.18));animation:coin 3s ease-in-out infinite}.line{fill:none;stroke:url(#cyan);stroke-width:9;stroke-linecap:round;stroke-dasharray:980;animation:draw 4s ease-in-out infinite alternate}@keyframes draw{from{stroke-dashoffset:980}to{stroke-dashoffset:0}}@keyframes rise{from{transform:translateY(24px);opacity:.56}to{transform:translateY(0);opacity:1}}@keyframes coin{50%{transform:translateY(-18px)}}
-    </style>
-  </defs>
-  <rect class="bg" width="1100" height="900" rx="46"/>
-  <g><path class="grid" d="M0 120H1100M0 240H1100M0 360H1100M0 480H1100M0 600H1100M0 720H1100M160 0V900M320 0V900M480 0V900M640 0V900M800 0V900M960 0V900"/></g>
-  <circle cx="820" cy="132" r="190" fill="#19d8ff" opacity=".13" filter="url(#glow)"/>
-  <path class="line" d="M112 710L230 640L344 560L462 475L590 360L745 260L990 110"/>
-  <g opacity=".88">
-    <rect class="step" x="520" y="414" width="164" height="54" rx="17"/>
-    <rect class="step" x="628" y="350" width="164" height="54" rx="17"/>
-    <rect class="step" x="736" y="286" width="164" height="54" rx="17"/>
-    <rect class="step" x="844" y="222" width="164" height="54" rx="17"/>
-    <circle class="coin" cx="586" cy="386" r="23"/><text x="575" y="394" font-family="Orbitron" font-size="20">₽</text>
-    <circle class="coin" cx="704" cy="320" r="23"/><text x="693" y="328" font-family="Orbitron" font-size="20">₽</text>
-    <circle class="coin" cx="822" cy="254" r="23"/><text x="811" y="262" font-family="Orbitron" font-size="20">₽</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Рост прибыли: ноутбук с коммерческим дашбордом">
+
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#020507"/><stop offset=".58" stop-color="#071018"/><stop offset="1" stop-color="#010203"/>
+  </linearGradient>
+  <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f9fdff"/><stop offset=".16" stop-color="#646d77"/>
+    <stop offset=".34" stop-color="#ffffff"/><stop offset=".53" stop-color="#20262d"/>
+    <stop offset=".72" stop-color="#dce8ef"/><stop offset="1" stop-color="#707984"/>
+  </linearGradient>
+  <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#111b24"/><stop offset="1" stop-color="#030609"/>
+  </linearGradient>
+  <radialGradient id="cyanGlow"><stop offset="0" stop-color="#4fd5ff" stop-opacity=".34"/><stop offset="1" stop-color="#4fd5ff" stop-opacity="0"/></radialGradient>
+  <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+    <feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse">
+    <path d="M72 0H0V72" fill="none" stroke="#5b7687" stroke-opacity=".12" stroke-width="1"/>
+  </pattern>
+  <style>
+    .metric{font:700 92px Arial,sans-serif;fill:url(#chrome);letter-spacing:-4px}
+    .label{font:500 20px Arial,sans-serif;fill:#b3c0ca;letter-spacing:2.5px}
+    .small{font:500 17px Arial,sans-serif;fill:#8796a1;letter-spacing:2px}
+    .stroke{fill:none;stroke:#a8bac5;stroke-opacity:.42;stroke-width:3}
+  </style>
+</defs>
+
+<rect width="900" height="1200" rx="40" fill="url(#bg)"/>
+<rect width="900" height="1200" rx="40" fill="url(#grid)"/>
+<circle cx="670" cy="260" r="250" fill="url(#cyanGlow)"/>
+<g transform="translate(88 150)">
+  <path d="M100 55 Q100 20 140 20 H650 Q690 20 690 60 V570 H100Z" fill="url(#panel)" stroke="#5b6974" stroke-width="3"/>
+  <rect x="132" y="64" width="526" height="442" rx="18" fill="#020507" stroke="#20313d" stroke-width="2"/>
+  <rect x="132" y="64" width="526" height="442" rx="18" fill="url(#grid)" opacity=".65"/>
+  <path d="M56 570 H734 L810 650 Q820 666 798 674 H10 Q-12 666 0 650Z" fill="url(#chrome)" opacity=".78"/>
+  <rect x="300" y="592" width="190" height="16" rx="8" fill="#222b33"/>
+  <g>
+    <rect x="166" y="100" width="150" height="96" rx="16" fill="#0b1117" stroke="#30414d"/>
+    <text x="184" y="142" class="small">ОБОРОТ</text><text x="184" y="181" class="label">×4,7</text>
+    <rect x="334" y="100" width="150" height="96" rx="16" fill="#0b1117" stroke="#30414d"/>
+    <text x="352" y="142" class="small">ПРИБЫЛЬ</text><text x="352" y="181" class="label">×8,3</text>
+    <rect x="502" y="100" width="124" height="96" rx="16" fill="#0b1117" stroke="#30414d"/>
+    <text x="520" y="142" class="small">ЗАПУСКИ</text><text x="520" y="181" class="label">8</text>
   </g>
-  <text class="huge" x="92" y="250">×4,7</text>
-  <text class="label" x="102" y="294">ОБОРОТ НАПРАВЛЕНИЯ</text>
-  <text class="huge" x="92" y="506">×8,3</text>
-  <text class="label" x="102" y="552">МАРЖИНАЛЬНАЯ ПРИБЫЛЬ НАПРАВЛЕНИЯ</text>
-  <text class="big" x="746" y="574">8</text>
-  <text class="label" x="746" y="620">ПРОЕКТНЫХ ЗАПУСКОВ</text>
-  <text class="big" x="114" y="822">2</text>
-  <text class="label" x="116" y="866">ТЕНДЕРНЫЕ ПОБЕДЫ</text>
-  <text class="big" x="640" y="800">40+</text>
-  <text class="big" x="820" y="800">млн ₽</text>
-  <text class="label" x="646" y="846">КОММЕРЧЕСКИХ ПРЕДЛОЖЕНИЙ</text>
+  <g opacity=".35">
+    <path d="M170 430H620M170 360H620M170 290H620M170 220H620" class="stroke"/>
+    <path d="M220 210V455M320 210V455M420 210V455M520 210V455M620 210V455" class="stroke"/>
+  </g>
+</g>
+<text x="74" y="915" class="metric">×4,7</text>
+<text x="78" y="955" class="label">ОБОРОТ НАПРАВЛЕНИЯ</text>
+<text x="500" y="915" class="metric">×8,3</text>
+<text x="504" y="955" class="label">МАРЖИНАЛЬНАЯ ПРИБЫЛЬ</text>
+<text x="78" y="1085" class="metric">8</text>
+<text x="82" y="1125" class="label">ПРОЕКТНЫХ ЗАПУСКОВ</text>
+<text x="470" y="1085" class="metric" style="font-size:74px">40+ млн ₽</text>
+<text x="474" y="1125" class="label" style="font-size:15px;letter-spacing:1.2px">КОММЕРЧЕСКИХ ПРЕДЛОЖЕНИЙ</text>
 </svg>
