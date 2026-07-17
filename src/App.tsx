@@ -120,9 +120,9 @@ const sceneSource: Record<CaseSceneType, string> = {
 
 const neonPath: Record<CaseSceneType, string> = {
   scale: "M250 1320 C345 1270 425 1195 510 1170 S660 1080 740 1010 820 950 875 900",
-  profit: "M240 610 C320 575 355 590 420 515 S520 495 585 430 670 420 740 330 815 255",
+  profit: "M292 712 C350 690 392 652 445 626 S530 568 590 535 680 470 808 390",
   shop: "M160 870 C245 845 320 790 400 730 S520 650 610 565 700 470 810 385",
-  product: "M565 424 C605 412 640 387 680 360",
+  product: "M548 565 C575 552 600 536 625 515",
 };
 
 const neonViewBox: Record<CaseSceneType, string> = {
