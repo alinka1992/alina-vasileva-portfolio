@@ -9,6 +9,7 @@ import "./approved-design.css";
 import "./approved-polish.css";
 import "./mobile-final-overrides.css";
 import "./approved-scale.css";
+import "./final-overrides.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
