@@ -1,5 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Производство контента и рост интернет-магазина">
-
 <defs>
   <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#020507"/><stop offset=".58" stop-color="#071018"/><stop offset="1" stop-color="#010203"/>
@@ -23,10 +22,8 @@
     .metric{font:700 92px Arial,sans-serif;fill:url(#chrome);letter-spacing:-4px}
     .label{font:500 20px Arial,sans-serif;fill:#b3c0ca;letter-spacing:2.5px}
     .small{font:500 17px Arial,sans-serif;fill:#8796a1;letter-spacing:2px}
-    .stroke{fill:none;stroke:#a8bac5;stroke-opacity:.42;stroke-width:3}
   </style>
 </defs>
-
 <rect width="900" height="1200" rx="40" fill="url(#bg)"/>
 <rect width="900" height="1200" rx="40" fill="url(#grid)"/>
 <circle cx="660" cy="315" r="280" fill="url(#cyanGlow)"/>
@@ -61,6 +58,6 @@
 <text x="66" y="905" class="label" style="font-size:16px;letter-spacing:1.4px">ЗАЯВКИ В ИНТЕРНЕТ-МАГАЗИН</text>
 <text x="500" y="865" class="metric">×5</text>
 <text x="504" y="905" class="label" style="font-size:16px;letter-spacing:1.4px">ПРОИЗВОДСТВО КОНТЕНТА</text>
-<text x="62" y="1080" class="metric" style="font-size:80px">0,4086</text>
+<text x="62" y="1080" class="metric" style="font-size:88px">+16%</text>
 <text x="66" y="1120" class="label">КОНВЕРСИЯ САЙТА</text>
 </svg>
