@@ -1,0 +1,72 @@
+/* Final hierarchy and composition polish. Loaded after approved-design.css. */
+
+.table-row p {
+  color: var(--approved-ink);
+  font-size: clamp(24px, 2vw, 36px);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+}
+
+.table-row h3 {
+  color: #a9bbc6;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: .02em;
+}
+
+.portrait img {
+  object-fit: contain;
+  object-position: right bottom;
+}
+
+.case-scale .case-art img { object-position: center center; }
+.case-profit .case-art img,
+.case-shop .case-art img,
+.case-product .case-art img { object-position: center center; }
+
+@media (max-width: 1024px) and (pointer: coarse), (max-width: 760px) {
+  .hero-copy { position: relative; z-index: 6; }
+  .portrait {
+    right: -1vw;
+    width: 53vw;
+    max-width: 300px;
+  }
+  .portrait img {
+    object-position: 58% bottom;
+    -webkit-mask-image: radial-gradient(ellipse 72% 92% at 66% 54%, #000 48%, rgba(0,0,0,.82) 70%, transparent 100%);
+    mask-image: radial-gradient(ellipse 72% 92% at 66% 54%, #000 48%, rgba(0,0,0,.82) 70%, transparent 100%);
+  }
+
+  .cases .section-head {
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--approved-line);
+  }
+
+  .case-card:first-of-type { border-top: 0; }
+  .case-copy h3 { max-width: 94%; }
+  .case-dashboard { box-shadow: 0 22px 66px rgba(0,0,0,.3); }
+
+  .table-row p { font-size: clamp(26px, 7.2vw, 35px); }
+  .table-row h3 { font-size: 15px; }
+}
+
+@media (max-width: 390px) {
+  .portrait { right: 0; width: 50vw; max-width: 250px; }
+  .hero-copy { width: 66%; }
+}
+
+@media (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
+  .portrait { right: 3vw; width: 39vw; max-width: 360px; }
+  .portrait img { object-position: center bottom; }
+}
+
+@media (min-width: 1025px) {
+  .table-row {
+    grid-template-columns: 130px minmax(170px,.72fr) minmax(280px,1.25fr) minmax(230px,1fr);
+  }
+  .table-row p { font-size: clamp(26px, 2.15vw, 38px); }
+  .table-row h3 { font-size: 15px; }
+  .portrait { width: min(45vw, 720px); right: 0; }
+  .portrait img { object-position: center bottom; }
+}
