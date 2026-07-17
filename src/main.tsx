@@ -5,6 +5,7 @@ import "./index.css";
 import "./responsive-fixes.css";
 import "./typography-fixes.css";
 import "./mobile-hero.css";
+import "./approved-design.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
