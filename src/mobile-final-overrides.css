@@ -1,0 +1,65 @@
+/* Final mobile corrections requested after device review. Loaded last. */
+@media (max-width: 1024px) and (pointer: coarse), (max-width: 760px) {
+  /* No interface animation on mobile: only neon lines inside case visuals move. */
+  .progress { display: none !important; }
+
+  /* Portrait: show more of the face and dissolve the source background into the page. */
+  .portrait {
+    top: 104px;
+    right: 1vw;
+    width: 50vw;
+    max-width: 292px;
+    overflow: visible;
+    background: transparent !important;
+  }
+
+  .portrait::before,
+  .portrait::after { display: none !important; }
+
+  .portrait img {
+    object-fit: contain;
+    object-position: 76% bottom;
+    mix-blend-mode: screen;
+    opacity: .98;
+    filter: saturate(.8) contrast(1.2) brightness(.86);
+    -webkit-mask-image: radial-gradient(ellipse 68% 94% at 68% 55%, #000 46%, rgba(0,0,0,.9) 63%, rgba(0,0,0,.48) 78%, transparent 100%);
+    mask-image: radial-gradient(ellipse 68% 94% at 68% 55%, #000 46%, rgba(0,0,0,.9) 63%, rgba(0,0,0,.48) 78%, transparent 100%);
+  }
+
+  /* The first case uses the exact approved vertical artwork, without cropping. */
+  .case-scale .case-dashboard {
+    aspect-ratio: 280 / 498;
+    background: #020507;
+  }
+
+  .case-scale .case-art img {
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  /* Make graph animation deliberately slow and subtle. */
+  .case-neon path {
+    animation-duration: 5.8s !important;
+    filter: drop-shadow(0 0 6px rgba(80, 207, 255, .72));
+  }
+}
+
+@media (max-width: 390px) {
+  .portrait {
+    right: 2vw;
+    width: 47vw;
+    max-width: 238px;
+  }
+  .portrait img { object-position: 79% bottom; }
+}
+
+@media (orientation: landscape) and (max-height: 560px) and (pointer: coarse) {
+  .portrait {
+    top: 58px;
+    right: 4vw;
+    width: 36vw;
+    max-width: 340px;
+  }
+  .portrait img { object-position: 72% bottom; }
+  .case-scale .case-dashboard { aspect-ratio: 280 / 498; }
+}
