@@ -10,6 +10,7 @@ import "./approved-polish.css";
 import "./mobile-final-overrides.css";
 import "./approved-scale.css";
 import "./final-overrides.css";
+import "./visual-polish.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
