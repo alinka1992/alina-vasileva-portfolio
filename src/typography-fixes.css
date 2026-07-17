@@ -1,0 +1,50 @@
+/* Stable fallback typography used after the main stylesheet.
+   This prevents layout shifts when remote fonts are slow or unavailable. */
+
+:root {
+  font-family: "Segoe UI", Inter, Arial, sans-serif;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Segoe UI", Inter, Arial, sans-serif;
+}
+
+.brand,
+nav a,
+.hero-copy > span,
+.section-head > span,
+.case-copy > p,
+.case-logic span,
+.metric span,
+.table-row time,
+.table-row span,
+.edu time,
+.contact > span,
+.hero-copy p,
+.location,
+.glass-panel span,
+.hero-system span,
+.system-board span,
+.product-stack span {
+  font-family: "Segoe UI", Inter, Arial, sans-serif;
+}
+
+.hero h1,
+.section-head h2,
+.case-copy h3,
+.contact h2 {
+  text-wrap: balance;
+}
+
+.hero-copy p,
+.case-logic p,
+.table-row p,
+.table-row span,
+.edu h3,
+.edu p {
+  text-wrap: pretty;
+}

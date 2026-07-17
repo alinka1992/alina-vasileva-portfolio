@@ -1,0 +1,213 @@
+/* Mobile hero matched to the approved dark chrome reference. */
+@media (max-width: 560px) {
+  header {
+    background: rgba(5, 8, 11, .78);
+    border-bottom-color: rgba(190, 218, 238, .08);
+    color: #eef5fb;
+  }
+
+  .menu {
+    border-color: rgba(210, 230, 244, .18);
+  }
+
+  .menu i {
+    background: #dce8f1;
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding: 86px 16px 24px;
+    color: #eef5fb;
+    background:
+      radial-gradient(circle at 78% 20%, rgba(116, 184, 228, .12), transparent 24%),
+      radial-gradient(circle at 22% 58%, rgba(70, 113, 146, .09), transparent 32%),
+      linear-gradient(145deg, #05080b 0%, #090d11 54%, #020406 100%);
+  }
+
+  .hero:before {
+    z-index: 0;
+    background:
+      linear-gradient(90deg, rgba(123, 167, 198, .05) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(123, 167, 198, .04) 1px, transparent 1px);
+    background-size: 54px 54px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,.7), transparent 72%);
+  }
+
+  .hero-copy {
+    z-index: 5;
+    width: 100%;
+    max-width: none;
+    padding-top: 0;
+  }
+
+  .hero-copy > span {
+    display: none;
+  }
+
+  .hero h1 {
+    width: 70%;
+    max-width: 270px;
+    margin: 48px 0 12px;
+    font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif;
+    font-size: clamp(43px, 13.2vw, 58px);
+    font-weight: 300;
+    line-height: .88;
+    letter-spacing: -.055em;
+    color: transparent;
+    background:
+      linear-gradient(180deg,
+        #ffffff 0%,
+        #9ea9b2 16%,
+        #f8fbff 28%,
+        #5a646d 42%,
+        #eff6fb 56%,
+        #707a83 72%,
+        #f7fbff 88%,
+        #8b969f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: .7px rgba(226, 241, 252, .9);
+    filter:
+      drop-shadow(0 0 2px rgba(255,255,255,.9))
+      drop-shadow(0 0 9px rgba(125, 196, 244, .38));
+    text-wrap: balance;
+  }
+
+  .hero h1 em {
+    color: inherit;
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .hero-copy p {
+    width: 68%;
+    max-width: 250px;
+    margin: 0;
+    color: rgba(225, 233, 240, .84);
+    font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.45;
+    letter-spacing: .11em;
+  }
+
+  .hero-fact {
+    z-index: 5;
+    width: 60%;
+    max-width: 220px;
+    margin-top: 34px;
+    padding: 17px 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(146, 211, 251, .58);
+  }
+
+  .hero-fact:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #dff6ff;
+    box-shadow: 0 0 12px #7bd5ff;
+  }
+
+  .hero-fact b {
+    color: rgba(229, 236, 242, .92);
+    font-family: "Arial Narrow", "Segoe UI", Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 300;
+    letter-spacing: .08em;
+  }
+
+  .hero-fact span {
+    display: none;
+  }
+
+  .hero-links,
+  .location {
+    display: none;
+  }
+
+  .portrait {
+    z-index: 3;
+    top: 104px;
+    right: -30vw;
+    bottom: 0;
+    width: 94vw;
+    max-width: 430px;
+    filter: drop-shadow(-16px 24px 54px rgba(0,0,0,.46));
+    overflow: visible;
+  }
+
+  .portrait:before {
+    display: none;
+  }
+
+  .portrait:after {
+    background:
+      linear-gradient(90deg, #05080b 0%, rgba(5,8,11,.8) 10%, transparent 34%),
+      linear-gradient(0deg, #020406 0%, transparent 18%, transparent 86%, rgba(5,8,11,.2) 100%);
+  }
+
+  .portrait img {
+    object-fit: cover;
+    object-position: 50% 42%;
+    opacity: 1;
+    filter: saturate(.82) contrast(1.06) brightness(.94);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.72) 16%, #000 32%, #000 100%);
+  }
+
+  .hero-dashboard {
+    z-index: 1;
+    top: 82px;
+    right: -44vw;
+    width: 132vw;
+    height: 54vh;
+    opacity: .13;
+    filter: grayscale(.3);
+  }
+
+  .glass-panel {
+    border-color: rgba(142, 192, 226, .11);
+    background: rgba(5, 10, 14, .12);
+    box-shadow: none;
+  }
+
+  .glass-panel span,
+  .glass-panel b,
+  .hero-system span {
+    color: rgba(173, 202, 223, .34);
+  }
+
+  .hero-line path {
+    stroke: rgba(153, 214, 255, .7);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 8px rgba(126, 203, 255, .72));
+  }
+}
+
+@media (max-width: 390px) {
+  .hero h1 {
+    width: 72%;
+    max-width: 248px;
+    margin-top: 42px;
+    font-size: 42px;
+  }
+
+  .hero-copy p {
+    width: 70%;
+    font-size: 11px;
+  }
+
+  .hero-fact {
+    width: 58%;
+  }
+
+  .portrait {
+    right: -35vw;
+    width: 98vw;
+  }
+}

@@ -1,0 +1,355 @@
+/* Final responsive QA layer. Keep this file loaded after index.css. */
+
+html,
+body,
+#root,
+main {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: clip;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.hero-copy,
+.case-copy,
+.table-row > *,
+.edu > * {
+  min-width: 0;
+}
+
+.hero h1,
+.case-copy h3,
+.section-head h2,
+.contact h2,
+.hero-copy p,
+.case-logic p,
+.table-row p,
+.table-row span,
+.edu h3,
+.edu p {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1180px) and (min-width: 901px) {
+  .hero-copy {
+    width: min(690px, 58vw);
+  }
+
+  .hero h1 {
+    font-size: clamp(66px, 8.4vw, 112px);
+  }
+
+  .hero-copy p {
+    font-size: clamp(18px, 1.8vw, 25px);
+    letter-spacing: .13em;
+  }
+
+  .portrait {
+    width: min(58vw, 760px);
+    right: -4vw;
+  }
+
+  .case-card {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    gap: 3.5vw;
+    min-height: 720px;
+  }
+
+  .case-dashboard {
+    min-height: 610px;
+  }
+
+  .case-copy h3 {
+    font-size: clamp(40px, 4.5vw, 62px);
+  }
+}
+
+@media (max-width: 900px) {
+  header {
+    width: 100%;
+  }
+
+  nav.open {
+    max-height: calc(100svh - 68px);
+    overflow-y: auto;
+    box-shadow: 0 24px 50px rgba(28, 34, 44, .08);
+  }
+
+  .hero {
+    min-height: 900px;
+    padding-bottom: 42px;
+  }
+
+  .hero-copy {
+    max-width: 680px;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(50px, 13vw, 78px);
+    line-height: .92;
+    letter-spacing: -.065em;
+  }
+
+  .hero-copy p {
+    max-width: 72%;
+    line-height: 1.35;
+  }
+
+  .hero-fact {
+    position: relative;
+    z-index: 4;
+    width: fit-content;
+    max-width: 56%;
+  }
+
+  .hero-links {
+    position: relative;
+    z-index: 4;
+    width: fit-content;
+    max-width: 56%;
+  }
+
+  .portrait {
+    top: 260px;
+    bottom: 40px;
+    width: min(80vw, 620px);
+    right: -13vw;
+  }
+
+  .portrait img {
+    object-position: 52% 48%;
+  }
+
+  .case-dashboard {
+    min-height: clamp(430px, 86vw, 700px);
+  }
+
+  .case-art img {
+    object-fit: contain;
+  }
+
+  .case-copy h3 {
+    line-height: .98;
+    letter-spacing: -.055em;
+  }
+
+  .case-logic div {
+    align-items: start;
+  }
+
+  .edu h3,
+  .edu p,
+  .table-row h3,
+  .table-row p,
+  .table-row span {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  header {
+    padding-inline: 16px;
+  }
+
+  .brand {
+    font-size: 16px;
+  }
+
+  .brand span {
+    margin-left: 4px;
+    font-size: 10px;
+  }
+
+  .hero {
+    min-height: 820px;
+    padding: 88px 16px 24px;
+  }
+
+  .hero h1 {
+    margin-top: 18px;
+    font-size: clamp(46px, 14.5vw, 66px);
+    line-height: .94;
+  }
+
+  .hero-copy p {
+    max-width: 74%;
+    font-size: 14px;
+    letter-spacing: .08em;
+  }
+
+  .hero-fact {
+    max-width: 62%;
+    gap: 12px;
+    margin-top: 30px;
+    padding-left: 14px;
+  }
+
+  .hero-fact b {
+    font-size: 30px;
+    white-space: nowrap;
+  }
+
+  .hero-fact span {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .hero-links {
+    max-width: 62%;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .hero-links a {
+    font-size: 12px;
+  }
+
+  .portrait {
+    top: 255px;
+    bottom: 26px;
+    width: 88vw;
+    right: -25vw;
+  }
+
+  .hero-dashboard {
+    top: 250px;
+    right: -68vw;
+    width: 150vw;
+    opacity: .24;
+  }
+
+  .location {
+    left: 16px;
+    right: 16px;
+    bottom: 18px;
+    max-width: 58%;
+    line-height: 1.45;
+  }
+
+  .section {
+    padding: 72px 16px;
+  }
+
+  .section-head {
+    margin-bottom: 34px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(40px, 13vw, 58px);
+  }
+
+  .case-card {
+    gap: 24px;
+    padding: 30px 0 56px;
+  }
+
+  .case-dashboard {
+    min-height: min(118vw, 510px);
+    border-radius: 22px;
+  }
+
+  .case-copy h3 {
+    margin: 16px 0;
+    font-size: clamp(38px, 12vw, 54px);
+  }
+
+  .case-logic {
+    margin-top: 28px;
+  }
+
+  .case-logic div {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 10px;
+    padding: 15px 0;
+  }
+
+  .case-logic p {
+    font-size: 13px;
+  }
+
+  .metrics {
+    inset: 5%;
+    gap: 10px;
+  }
+
+  .metric {
+    min-height: 76px;
+  }
+
+  .metric b {
+    font-size: clamp(34px, 12vw, 58px);
+  }
+
+  .system-board,
+  .product-stack {
+    gap: 8px;
+  }
+
+  .edu {
+    grid-template-columns: 58px minmax(0, 1fr) 18px;
+    gap: 12px;
+    min-height: 96px;
+  }
+
+  .edu h3 {
+    font-size: 16px;
+  }
+
+  .edu p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .contact {
+    min-height: 64svh;
+    padding: 76px 16px 24px;
+  }
+
+  .contact h2 {
+    font-size: clamp(42px, 14vw, 66px);
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .hero-copy p,
+  .hero-fact,
+  .hero-links {
+    max-width: 68%;
+  }
+
+  .portrait {
+    right: -31vw;
+  }
+
+  .case-logic div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
