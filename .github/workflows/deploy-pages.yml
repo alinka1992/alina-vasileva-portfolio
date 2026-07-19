@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Typecheck exact current commit
+        run: npm run typecheck
+
       - name: Build exact current commit
         run: |
           echo "Deploying $GITHUB_SHA"
