@@ -1,0 +1,316 @@
+/* Focused production fixes: one-screen mobile hero + logically correct store funnel. */
+
+@media (max-width: 759px) {
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 37%) minmax(0, 63%);
+    grid-template-areas:
+      "eyebrow eyebrow"
+      "title title"
+      "lead lead"
+      "actions actions"
+      "facts media";
+    align-items: start;
+    min-height: calc(100svh - var(--header-h));
+    padding: clamp(32px, 4.8svh, 44px) var(--page-x) 0;
+    overflow: clip;
+  }
+
+  .hero-copy {
+    display: contents;
+  }
+
+  .hero .eyebrow {
+    grid-area: eyebrow;
+  }
+
+  .hero h1 {
+    grid-area: title;
+    margin-top: 18px;
+    font-size: clamp(56px, 15vw, 72px);
+    line-height: .92;
+    letter-spacing: -.04em;
+  }
+
+  .hero-lead {
+    grid-area: lead;
+    max-width: 34ch;
+    margin-top: 24px;
+    color: #c4ced2;
+    font-size: 16px;
+    line-height: 1.52;
+  }
+
+  .hero-actions {
+    grid-area: actions;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+  }
+
+  .button-link,
+  .text-link {
+    min-height: 48px;
+    font-size: 10.5px;
+    letter-spacing: .12em;
+  }
+
+  .button-link {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  .text-link {
+    min-width: 0;
+    padding-inline: 4px;
+    white-space: nowrap;
+  }
+
+  .hero-facts {
+    grid-area: facts;
+    align-self: stretch;
+    z-index: 4;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 17px;
+    margin: 30px 0 0;
+    padding: 20px 14px 24px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .hero-facts div,
+  .hero-facts div:nth-child(3) {
+    grid-column: auto;
+    padding: 0;
+    border: 0;
+  }
+
+  .hero-facts dt {
+    font-size: clamp(27px, 7.8vw, 36px);
+    line-height: .95;
+  }
+
+  .hero-facts dd {
+    max-width: 13ch;
+    margin-top: 7px;
+    font-size: 9.5px;
+    line-height: 1.38;
+    letter-spacing: .085em;
+  }
+
+  .hero-facts div:nth-child(3) dt {
+    font-size: clamp(18px, 5.1vw, 23px);
+    line-height: 1.08;
+    white-space: nowrap;
+  }
+
+  .hero-media {
+    grid-area: media;
+    position: relative;
+    align-self: stretch;
+    width: calc(100% + var(--page-x));
+    height: clamp(274px, 35svh, 330px);
+    min-height: 0;
+    margin: 30px calc(var(--page-x) * -1) 0 0;
+    aspect-ratio: auto;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .hero-trend {
+    inset: 4% -55% -8% -42%;
+    width: 196%;
+    height: 104%;
+    opacity: .24;
+  }
+
+  .portrait-wrap {
+    inset: -2% -31% -3% -26%;
+    overflow: hidden;
+  }
+
+  .portrait-wrap::before {
+    right: 1%;
+    bottom: 0;
+    width: 88%;
+    height: 82%;
+    opacity: .44;
+  }
+
+  .portrait-wrap::after {
+    z-index: 3;
+    background:
+      linear-gradient(180deg, var(--bg) 0%, rgba(2,9,16,.46) 7%, rgba(2,9,16,0) 24%, rgba(2,9,16,.08) 76%, var(--bg) 100%),
+      linear-gradient(90deg, var(--bg) 0%, rgba(2,9,16,.48) 13%, rgba(2,9,16,.07) 34%, rgba(2,9,16,0) 64%);
+  }
+
+  .portrait-wrap img {
+    position: absolute;
+    right: -7%;
+    bottom: 0;
+    width: min(102vw, 430px);
+    max-width: none;
+    opacity: 1;
+    filter: saturate(.92) contrast(1.02) brightness(.96);
+    -webkit-mask-image: radial-gradient(ellipse 77% 88% at 67% 56%, #000 52%, rgba(0,0,0,.98) 69%, transparent 94%);
+    mask-image: radial-gradient(ellipse 77% 88% at 67% 56%, #000 52%, rgba(0,0,0,.98) 69%, transparent 94%);
+  }
+}
+
+@media (max-width: 374px) {
+  .hero {
+    grid-template-columns: minmax(0, 39%) minmax(0, 61%);
+    padding-top: 30px;
+  }
+
+  .hero h1 {
+    font-size: 55px;
+  }
+
+  .hero-lead {
+    margin-top: 21px;
+    font-size: 15.5px;
+  }
+
+  .hero-actions {
+    margin-top: 22px;
+  }
+
+  .hero-facts,
+  .hero-media {
+    margin-top: 26px;
+  }
+
+  .hero-media {
+    height: 266px;
+  }
+
+  .hero-facts {
+    gap: 14px;
+    padding-right: 10px;
+  }
+
+  .hero-facts dd {
+    font-size: 9px;
+  }
+}
+
+/* Store case: a real top-to-bottom funnel, not a falling growth line. */
+.visual-shell:has(.funnel-visual) {
+  position: relative;
+  aspect-ratio: auto;
+  min-height: 420px;
+  background:
+    radial-gradient(circle at 50% 78%, rgba(21, 169, 198, .12), transparent 36%),
+    linear-gradient(150deg, rgba(5, 18, 28, .94), rgba(3, 11, 18, .88));
+}
+
+.visual-shell:has(.funnel-visual)::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 18%;
+  bottom: 17%;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(34, 205, 232, .08), rgba(34, 205, 232, .64), rgba(138, 243, 255, .18));
+  box-shadow: 0 0 14px rgba(28, 201, 230, .18);
+}
+
+.funnel-visual {
+  width: 136%;
+  max-width: none;
+  height: 100%;
+  margin-left: -18%;
+}
+
+.funnel-rails,
+.funnel-flow {
+  display: none;
+}
+
+.funnel-bars rect {
+  stroke: rgba(83, 191, 217, .25);
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 12px 26px rgba(0, 0, 0, .18));
+}
+
+.funnel-bars rect:nth-child(1) {
+  x: 80px;
+  y: 58px;
+  width: 520px;
+  height: 76px;
+  rx: 20px;
+  fill: rgba(14, 48, 65, .78);
+}
+
+.funnel-bars rect:nth-child(2) {
+  x: 126px;
+  y: 176px;
+  width: 428px;
+  height: 76px;
+  rx: 20px;
+  fill: rgba(12, 58, 75, .76);
+}
+
+.funnel-bars rect:nth-child(3) {
+  x: 176px;
+  y: 294px;
+  width: 328px;
+  height: 76px;
+  rx: 20px;
+  fill: rgba(10, 72, 90, .78);
+}
+
+.funnel-bars rect:nth-child(4) {
+  x: 226px;
+  y: 412px;
+  width: 228px;
+  height: 76px;
+  rx: 20px;
+  fill: rgba(13, 104, 123, .82);
+  filter: drop-shadow(0 0 18px rgba(36, 199, 226, .16));
+}
+
+.funnel-stages circle {
+  display: none;
+}
+
+.funnel-stages g:nth-child(1) { transform: translate(340px, 98px); }
+.funnel-stages g:nth-child(2) { transform: translate(340px, 216px); }
+.funnel-stages g:nth-child(3) { transform: translate(340px, 334px); }
+.funnel-stages g:nth-child(4) { transform: translate(340px, 452px); }
+
+.funnel-stages text {
+  fill: #d7edf1;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: .09em;
+}
+
+.funnel-stages g:nth-child(4) text {
+  fill: #ecfdff;
+}
+
+@media (min-width: 760px) {
+  .visual-shell:has(.funnel-visual) {
+    min-height: 520px;
+  }
+
+  .funnel-visual {
+    width: 118%;
+    margin-left: -9%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funnel-bars rect,
+  .funnel-stages g {
+    transition: none !important;
+  }
+}
