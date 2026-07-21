@@ -1,30 +1,57 @@
+import { useState } from "react";
+
+const stages = [
+  { id: "reach", y: 68, left: 82, right: 678, label: "ОХВАТ" },
+  { id: "traffic", y: 190, left: 132, right: 628, label: "ТРАФИК" },
+  { id: "lead", y: 312, left: 188, right: 572, label: "ЗАЯВКА" },
+  { id: "deal", y: 434, left: 248, right: 512, label: "СДЕЛКА" },
+] as const;
+
 export default function FunnelVisual() {
-  const stages = [
-    { y: 58, left: 88, right: 672, label: "ОХВАТ", tone: 1 },
-    { y: 180, left: 132, right: 628, label: "ТРАФИК", tone: 2 },
-    { y: 302, left: 184, right: 576, label: "ЗАЯВКА", tone: 3 },
-    { y: 424, left: 246, right: 514, label: "СДЕЛКА", tone: 4 },
-  ];
+  const [active, setActive] = useState<string | null>(null);
+
   return (
-    <svg className="data-visual funnel-visual" viewBox="0 0 760 570" role="img" aria-label="Воронка от охвата до сделки">
+    <svg className="data-visual funnel-visual" viewBox="0 0 760 570" role="img" aria-label="Интерактивная воронка от охвата до сделки" onMouseLeave={() => setActive(null)}>
       <defs>
-        <linearGradient id="funnelGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#174052" stopOpacity=".72" /><stop offset="1" stopColor="#04111a" stopOpacity=".96" /></linearGradient>
+        <linearGradient id="funnelTop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#1b5368" stopOpacity=".78" /><stop offset="1" stopColor="#061823" stopOpacity=".96" /></linearGradient>
+        <linearGradient id="funnelFront" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#0c3344" stopOpacity=".86" /><stop offset="1" stopColor="#04111a" stopOpacity=".98" /></linearGradient>
         <linearGradient id="funnelEdge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#1a5d73" /><stop offset=".58" stopColor="#28cee8" /><stop offset="1" stopColor="#bdfaff" /></linearGradient>
       </defs>
-      <g className="funnel-grid">{Array.from({ length: 8 }).map((_,index) => <line key={`fv-${index}`} x1={74+index*88} y1="34" x2={74+index*88} y2="528" />)}{Array.from({ length: 6 }).map((_,index) => <line key={`fh-${index}`} x1="56" y1={62+index*92} x2="704" y2={62+index*92} />)}</g>
+      <g className="funnel-floor-grid">{Array.from({ length: 7 }).map((_, index) => <line key={`fh-${index}`} x1="58" y1={82 + index * 74} x2="702" y2={82 + index * 74} />)}</g>
       <g className="funnel-stage-list">
-        {stages.map((stage) => (
-          <g className={`funnel-stage stage-${stage.tone}`} key={stage.label}>
-            <polygon className="funnel-stage-shadow" points={`${stage.left+12},${stage.y+18} ${stage.right+12},${stage.y+18} ${stage.right-10},${stage.y+94} ${stage.left+34},${stage.y+94}`} />
-            <polygon className="funnel-stage-glass" fill="url(#funnelGlass)" points={`${stage.left},${stage.y} ${stage.right},${stage.y} ${stage.right-22},${stage.y+76} ${stage.left+22},${stage.y+76}`} />
-            <polyline className="funnel-stage-edge" stroke="url(#funnelEdge)" points={`${stage.left},${stage.y} ${stage.right},${stage.y} ${stage.right-22},${stage.y+76}`} />
-            <line className="funnel-stage-reflection" x1={stage.left+30} y1={stage.y+14} x2={stage.right-30} y2={stage.y+14} />
-            <text x={(stage.left+stage.right)/2} y={stage.y+48} textAnchor="middle">{stage.label}</text>
-          </g>
-        ))}
+        {stages.map((stage) => {
+          const isActive = active === stage.id;
+          const isDim = active !== null && !isActive;
+          const top = `${stage.left},${stage.y} ${stage.right},${stage.y} ${stage.right-24},${stage.y+54} ${stage.left+24},${stage.y+54}`;
+          const front = `${stage.left+24},${stage.y+54} ${stage.right-24},${stage.y+54} ${stage.right-38},${stage.y+88} ${stage.left+38},${stage.y+88}`;
+          return (
+            <g
+              className={`funnel-stage${isActive ? " is-active" : ""}${isDim ? " is-dim" : ""}`}
+              key={stage.id}
+              role="button"
+              tabIndex={0}
+              aria-label={`${stage.label}: этап воронки`}
+              onMouseEnter={() => setActive(stage.id)}
+              onFocus={() => setActive(stage.id)}
+              onBlur={() => setActive(null)}
+              onClick={() => setActive((value) => value === stage.id ? null : stage.id)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setActive((value) => value === stage.id ? null : stage.id);
+                }
+              }}
+            >
+              <polygon className="funnel-stage-shadow" points={`${stage.left+14},${stage.y+18} ${stage.right+14},${stage.y+18} ${stage.right-20},${stage.y+102} ${stage.left+48},${stage.y+102}`} />
+              <polygon className="funnel-stage-top" fill="url(#funnelTop)" points={top} />
+              <polygon className="funnel-stage-front" fill="url(#funnelFront)" points={front} />
+              <polyline className="funnel-stage-edge" stroke="url(#funnelEdge)" points={`${stage.left},${stage.y} ${stage.right},${stage.y} ${stage.right-24},${stage.y+54}`} />
+              <line className="funnel-stage-reflection" x1={stage.left+36} y1={stage.y+14} x2={stage.right-36} y2={stage.y+14} />
+              <text x={(stage.left+stage.right)/2} y={stage.y+37} textAnchor="middle">{stage.label}</text>
+            </g>
+          );
+        })}
       </g>
-      <path className="funnel-spine-static" d="M380 96 L380 472" />
-      <g className="funnel-flow-points">{[96,218,340,462].map((y,index) => <circle key={y} cx="380" cy={y} r={5+index} />)}</g>
     </svg>
   );
 }
