@@ -5,11 +5,11 @@ const audienceRows = [
 ] as const;
 
 const networkNodes = [
-  [520, 176],
-  [582, 130],
-  [636, 186],
-  [612, 250],
-  [548, 264],
+  [504, 174],
+  [566, 128],
+  [622, 182],
+  [608, 248],
+  [536, 260],
 ] as const;
 
 const signalDots = [
@@ -17,12 +17,12 @@ const signalDots = [
   [410, 300],
   [438, 282],
   [466, 262],
-  [492, 240],
+  [494, 240],
 ] as const;
 
 export default function PipelineVisual() {
   return (
-    <svg className="data-visual pipeline-visual" viewBox="0 0 760 560" role="img" aria-label="Семинар формирует аудиторию, которая передаёт информацию в партнёрскую сеть и приводит лиды в новый бизнес-юнит">
+    <svg className="data-visual pipeline-visual" viewBox="0 0 760 560" role="img" aria-label="Семинар формирует аудиторию, которая передаёт информацию в партнёрскую сеть и создаёт прибыльный бизнес-юнит">
       <defs>
         <linearGradient id="seminarGlass" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#17394a" stopOpacity=".82" />
@@ -37,6 +37,11 @@ export default function PipelineVisual() {
           <stop offset="0" stopColor="#e1fdff" />
           <stop offset=".24" stopColor="#2bcbe5" />
           <stop offset="1" stopColor="#0a3142" />
+        </radialGradient>
+        <radialGradient id="coinFace" cx="38%" cy="28%" r="74%">
+          <stop offset="0" stopColor="#d9fbff" stopOpacity=".34" />
+          <stop offset=".3" stopColor="#1ea8c4" stopOpacity=".34" />
+          <stop offset="1" stopColor="#061d29" stopOpacity=".98" />
         </radialGradient>
         <filter id="seminarGlow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="6" result="blur" />
@@ -73,36 +78,32 @@ export default function PipelineVisual() {
         )))}
       </g>
 
-      <path className="seminar-flow-path" d="M350 342 C408 326 456 280 520 222" />
+      <path className="seminar-flow-path" d="M350 342 C410 326 458 278 510 222" />
       <g className="seminar-signals">
         {signalDots.map(([x, y], index) => <circle className="seminar-signal" key={`${x}-${y}`} cx={x} cy={y} r={index % 2 === 0 ? 5 : 3.5} style={{ animationDelay: `${index * 120}ms` }} />)}
       </g>
 
       <g className="partner-network">
-        <circle className="network-ring outer" cx="582" cy="198" r="100" />
-        <circle className="network-ring inner" cx="582" cy="198" r="62" />
-        <circle className="network-hub" cx="582" cy="198" r="17" fill="url(#seminarCore)" filter="url(#seminarGlow)" />
+        <circle className="network-ring outer" cx="566" cy="198" r="96" />
+        <circle className="network-ring inner" cx="566" cy="198" r="60" />
+        <circle className="network-hub" cx="566" cy="198" r="17" fill="url(#seminarCore)" filter="url(#seminarGlow)" />
         {networkNodes.map(([x, y], index) => (
           <g className="network-node" key={`${x}-${y}`} style={{ animationDelay: `${index * 120}ms` }}>
-            <path d={`M582 198 L${x} ${y}`} />
+            <path d={`M566 198 L${x} ${y}`} />
             <circle className="network-node-halo" cx={x} cy={y} r="14" />
             <circle className="network-node-core" cx={x} cy={y} r="7" />
           </g>
         ))}
+        <text className="partner-network-label" x="566" y="318" textAnchor="middle">ПАРТНЁРСКАЯ СЕТЬ</text>
       </g>
 
-      <path className="business-flow" d="M632 222 C650 238 660 254 670 276" />
-      <g className="business-unit" transform="translate(668 344)">
-        <rect x="-70" y="-84" width="140" height="168" rx="24" fill="url(#seminarGlass)" />
-        <rect className="business-unit-inner" x="-44" y="-56" width="88" height="66" rx="13" />
-        <circle cx="0" cy="-22" r="21" fill="url(#seminarCore)" filter="url(#seminarGlow)" />
-        <path d="M-38 32h76M-38 51h76" />
-        <text y="108" textAnchor="middle"><tspan x="0">НОВЫЙ</tspan><tspan x="0" dy="18">БИЗНЕС-ЮНИТ</tspan></text>
-      </g>
-
-      <g className="repeat-system">
-        <path className="repeat-loop" d="M706 438 C700 500 620 520 548 486 C512 470 486 446 470 412" />
-        <path className="repeat-arrow" d="M466 412l3 23 21-10" />
+      <g className="business-coin" transform="translate(654 418)">
+        <circle className="coin-halo" r="75" />
+        <circle className="coin-edge" r="63" />
+        <circle className="coin-face" r="54" fill="url(#coinFace)" />
+        <circle className="coin-ring" r="43" />
+        <text className="coin-ruble" y="5" textAnchor="middle">₽</text>
+        <text className="coin-label" y="31" textAnchor="middle">БИЗНЕС-ЮНИТ</text>
       </g>
     </svg>
   );
