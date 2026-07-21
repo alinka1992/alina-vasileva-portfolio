@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { cases, clientSegments, education, experience, expertise } from "./content";
+import { cases, clientPortfolio, education, experience, expertise } from "./content";
 import ExpertiseIcon from "./ExpertiseIcon";
 import HeroTrend from "./HeroTrend";
 import CaseVisual from "./CaseVisual";
@@ -78,14 +78,18 @@ export default function App() {
         </div>
         <div className="hero-media" aria-hidden="true">
           <HeroTrend />
-          <div className="portrait-aura" />
           <img
             className="hero-portrait"
-            src={`${base}assets/alina-portrait-cutout.svg`}
+            src={`${base}assets/alina-portrait.jpg`}
             alt=""
+            width="640"
+            height="640"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             onError={(event) => {
               event.currentTarget.onerror = null;
-              event.currentTarget.src = `${base}assets/alina-portrait.jpg`;
+              event.currentTarget.src = `${base}assets/alina-portrait-cutout.svg`;
             }}
           />
         </div>
@@ -108,22 +112,15 @@ export default function App() {
       </section>
 
       <section className="section clients" id="clients" data-reveal>
-        <div className="clients-heading">
-          <div className="section-heading compact-heading">
-            <p>Клиентский портфель</p>
-            <h2>Бренды и компании из разных отраслей</h2>
-          </div>
-          <p>Федеральные бренды, девелоперы, промышленность, сервисы и общественные институты.</p>
-        </div>
-        <div className="client-segments">
-          {clientSegments.map((segment) => (
-            <article className={segment.isPartner ? "client-row is-partner" : "client-row"} key={segment.title}>
-              <h3>{segment.title}</h3>
-              <div className="client-strip" tabIndex={0} aria-label={`${segment.title}: список компаний`}>
-                {segment.clients.map((client) => <span key={client}>{client}</span>)}
+        <p className="section-label client-label">Клиентский портфель</p>
+        <div className="client-marquee" tabIndex={0} aria-label="Клиентский портфель: бренды и компании">
+          <div className="client-marquee-track">
+            {[0, 1].map((copy) => (
+              <div className="client-marquee-group" aria-hidden={copy === 1} key={copy}>
+                {clientPortfolio.map((client) => <span key={`${copy}-${client}`}>{client}</span>)}
               </div>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -173,7 +170,7 @@ export default function App() {
 
       <section className="section experience" id="experience" data-reveal>
         <div className="section-heading compact-heading"><p>Опыт</p><h2>Управленческий трек</h2></div>
-        <div className="experience-track" aria-label="Горизонтальный карьерный трек">
+        <div className="experience-track" aria-label="Карьерный трек от 2026 к 2016 году">
           {experience.map(([years, role, company, scope]) => (
             <article className="experience-step" key={`${years}-${company}`}>
               <time>{years}</time>
