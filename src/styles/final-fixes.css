@@ -126,6 +126,133 @@
   line-height: 1.4;
 }
 
+/* Final requested fixes: full-width compact client line. */
+.hero-clients {
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.hero-clients-label {
+  width: 100%;
+  max-width: none;
+  padding: 0 var(--page-x);
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  font-size: 8px;
+}
+
+.hero-clients .client-marquee {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.hero-clients .client-marquee-track {
+  animation-duration: 94s;
+}
+
+.hero-clients .client-marquee-group {
+  min-height: 27px;
+  padding-right: 10px;
+}
+
+.hero-clients .client-marquee-group span {
+  padding: 0 10px;
+  font-size: 9.5px;
+  letter-spacing: .015em;
+}
+
+/* Final requested fixes: seminar → partner network → business unit coin. */
+.partner-network-label {
+  fill: #91a8af;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: .12em;
+}
+
+.business-coin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: business-coin-pulse 4.8s ease-in-out infinite;
+}
+
+.coin-halo {
+  fill: rgba(32,197,225,.055);
+  stroke: rgba(76,214,235,.1);
+  stroke-width: 1;
+}
+
+.coin-edge {
+  fill: rgba(4,18,27,.96);
+  stroke: rgba(112,232,245,.46);
+  stroke-width: 2;
+}
+
+.coin-face {
+  stroke: rgba(89,218,237,.34);
+  stroke-width: 1.4;
+}
+
+.coin-ring {
+  fill: none;
+  stroke: rgba(187,244,250,.24);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 6;
+}
+
+.coin-ruble {
+  fill: #dcfbff;
+  font-size: 48px;
+  font-weight: 500;
+  filter: drop-shadow(0 0 8px rgba(32,197,225,.44));
+}
+
+.coin-label {
+  fill: #b9d8dd;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: .095em;
+}
+
+/* Final requested fixes: management track in one compact row. */
+.experience-track {
+  grid-template-columns: repeat(4, minmax(210px, 1fr)) !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+
+.experience-step {
+  min-width: 210px;
+  padding: 15px 14px 17px;
+}
+
+.experience-step time {
+  font-size: 9px;
+}
+
+.experience-step h3 {
+  margin-top: 11px;
+  font-size: 15px;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+}
+
+.experience-step .company {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.experience-step .scope {
+  margin-top: 7px;
+  font-size: 10.5px;
+  line-height: 1.4;
+}
+
 @media (max-width: 759px) {
   .hero-media::after {
     background:
@@ -153,21 +280,22 @@
   }
 
   .hero-clients {
-    padding: 0 var(--page-x) 12px;
+    padding-bottom: 10px;
   }
 
   .hero-clients-label {
-    margin-bottom: 6px;
-    font-size: 8px;
+    padding: 0 var(--page-x);
+    margin-bottom: 5px;
+    font-size: 7.5px;
   }
 
   .hero-clients .client-marquee-group {
-    min-height: 30px;
+    min-height: 25px;
   }
 
   .hero-clients .client-marquee-group span {
-    padding: 0 11px;
-    font-size: 10px;
+    padding: 0 9px;
+    font-size: 9px;
   }
 
   .case-automation .metric-owner {
@@ -176,6 +304,10 @@
 
   .case-automation .metric-owner strong {
     font-size: clamp(24px, 7vw, 31px) !important;
+  }
+
+  .experience-track {
+    padding-bottom: 5px;
   }
 }
 
@@ -191,6 +323,15 @@
     bottom: -9%;
     width: 70%;
     height: 88%;
+  }
+
+  .experience-track {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    overflow: visible;
+  }
+
+  .experience-step {
+    min-width: 0;
   }
 }
 
@@ -213,9 +354,7 @@
   .seminar-signal,
   .network-ring.inner,
   .network-node,
-  .business-unit,
-  .repeat-loop,
-  .repeat-arrow {
+  .business-coin {
     animation: none !important;
   }
 }
@@ -223,4 +362,9 @@
 @keyframes portrait-light-breathe {
   0%, 100% { opacity: .66; transform: scale(.97); }
   50% { opacity: .96; transform: scale(1.025); }
+}
+
+@keyframes business-coin-pulse {
+  0%, 100% { opacity: .88; filter: drop-shadow(0 0 0 rgba(32,197,225,0)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(32,197,225,.2)); }
 }
