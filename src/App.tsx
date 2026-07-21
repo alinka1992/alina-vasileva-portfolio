@@ -81,10 +81,10 @@ export default function App() {
           <div className="portrait-light" />
           <img
             className="hero-portrait hero-portrait-original"
-            src={`${base}assets/alina-portrait.jpg`}
+            src={`${base}assets/alina-portrait-transparent.png.png`}
             alt=""
-            width="640"
-            height="640"
+            width="1024"
+            height="1536"
             loading="eager"
             decoding="async"
             fetchPriority="high"
