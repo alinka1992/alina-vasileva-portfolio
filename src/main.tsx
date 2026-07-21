@@ -6,6 +6,7 @@ import "./styles/sections.css";
 import "./styles/visuals.css";
 import "./styles/responsive.css";
 import "./styles/final-fixes.css";
+import "./styles/experience-timeline.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
