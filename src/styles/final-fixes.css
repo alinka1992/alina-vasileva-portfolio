@@ -83,6 +83,12 @@
   color: rgba(32,197,225,.36);
 }
 
+/* SVG node positioning is already defined by transform attributes.
+   Animating transform on the same group collapsed the labels into the corner. */
+.auto-nodes > g {
+  animation: none !important;
+}
+
 .case-automation .metric-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }
@@ -90,22 +96,22 @@
 .case-automation .metric-owner {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: minmax(150px, .72fr) minmax(0, 1.28fr);
-  gap: 18px;
-  align-items: end;
-  padding-bottom: 2px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding-bottom: 0;
 }
 
 .case-automation .metric-owner strong {
-  max-width: 12ch;
-  font-size: clamp(25px, 2.2vw, 35px) !important;
-  line-height: 1.02;
+  max-width: none;
+  font-size: clamp(28px, 2.25vw, 36px) !important;
+  line-height: 1.04;
   white-space: normal !important;
 }
 
 .case-automation .metric-owner span {
-  max-width: 24ch;
-  margin: 0 0 2px;
+  max-width: 30ch;
+  margin: 0;
   font-size: 11px;
   line-height: 1.4;
 }
@@ -149,16 +155,12 @@
   }
 
   .case-automation .metric-owner {
-    grid-template-columns: 1fr;
     gap: 7px;
   }
 
   .case-automation .metric-owner strong {
-    max-width: none;
     font-size: clamp(24px, 7vw, 31px) !important;
   }
-
-  .case-automation .metric-owner span { margin: 0; }
 }
 
 @media (min-width: 760px) {
