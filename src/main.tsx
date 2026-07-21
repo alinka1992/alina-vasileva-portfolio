@@ -7,6 +7,7 @@ import "./styles/visuals.css";
 import "./styles/responsive.css";
 import "./styles/final-fixes.css";
 import "./styles/experience-timeline.css";
+import "./styles/mobile-hero-face-clear.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
