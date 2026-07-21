@@ -6,8 +6,10 @@
   width: 76%;
   height: 88%;
   pointer-events: none;
-  background: radial-gradient(ellipse at 60% 54%, rgba(30, 182, 211, .15) 0%, rgba(7, 44, 60, .08) 36%, transparent 72%);
-  filter: blur(30px);
+  background:
+    radial-gradient(ellipse at 63% 43%, rgba(97, 222, 239, .12) 0%, rgba(27, 143, 169, .07) 30%, transparent 62%),
+    radial-gradient(ellipse at 60% 58%, rgba(18, 104, 129, .11) 0%, rgba(6, 39, 54, .06) 42%, transparent 74%);
+  filter: blur(26px);
   animation: portrait-light-breathe 6.5s ease-in-out infinite;
 }
 
@@ -25,9 +27,17 @@
   object-fit: contain;
   -webkit-mask-image: none !important;
   mask-image: none !important;
-  filter: saturate(1.12) contrast(1.09) brightness(1.06) drop-shadow(0 30px 54px rgba(0,0,0,.36));
+  filter:
+    brightness(1.035)
+    contrast(1.105)
+    saturate(1.045)
+    drop-shadow(0 28px 56px rgba(0,0,0,.42))
+    drop-shadow(0 0 16px rgba(52,196,221,.055));
   image-rendering: auto;
-  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0);
+  will-change: filter, transform;
 }
 
 .hero-trend { opacity: .25; }
@@ -127,6 +137,12 @@
     right: -8vw !important;
     bottom: -26px !important;
     width: min(103vw, 474px) !important;
+    filter:
+      brightness(1.03)
+      contrast(1.09)
+      saturate(1.04)
+      drop-shadow(0 22px 42px rgba(0,0,0,.38))
+      drop-shadow(0 0 12px rgba(52,196,221,.045));
   }
 
   .portrait-light {
