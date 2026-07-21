@@ -1,4 +1,4 @@
-.auto-floor-glow { fill: rgba(25,191,220,.14); filter: blur(18px); }
+.auto-floor-glow { fill: rgba(25,191,220,.15); filter: blur(18px); }
 .auto-floor { fill: rgba(4,17,26,.86); stroke: rgba(53,183,211,.2); }
 .auto-floor-grid path { fill: none; stroke: rgba(58,178,203,.13); stroke-width: 1; }
 .auto-back-panel polygon { stroke: rgba(72,190,216,.22); stroke-width: 1; }
@@ -9,14 +9,10 @@
 .auto-center-shadow { fill: rgba(0,0,0,.34); transform: translateY(14px); filter: blur(10px); }
 .auto-center-glass { stroke: rgba(81,214,236,.42); stroke-width: 1.2; }
 .auto-center-highlight { fill: none; stroke: rgba(176,247,255,.54); stroke-width: 1.1; }
-.auto-center-kicker { fill: #6f99a5; font-size: 10px; letter-spacing: .18em; }
-.auto-center-title { fill: #e0f5f7; font-size: 19px; letter-spacing: .06em; }
-.auto-center-subtitle { fill: #78a4ae; font-size: 8px; letter-spacing: .08em; }
+.auto-center-title { fill: #e0f5f7; font-size: 23px; font-weight: 500; letter-spacing: .055em; }
 .auto-mini-area { fill: rgba(31,198,226,.12); }
-.auto-mini-line { fill: none; stroke: #27cbe5; stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(34,203,229,.44)); }
+.auto-mini-line { fill: none; stroke: #27cbe5; stroke-width: 2.7; filter: drop-shadow(0 0 6px rgba(34,203,229,.44)); }
 .auto-mini-chart circle { fill: #d9fbff; stroke: #24cae5; stroke-width: 2; }
-.auto-status circle { fill: #6fe7f6; }
-.auto-status text { fill: #74929c; font-size: 9px; letter-spacing: .12em; }
 .auto-core ellipse { fill: none; stroke: rgba(64,211,235,.48); stroke-width: 1.4; }
 .auto-core ellipse:first-child { fill: rgba(10,44,57,.5); }
 .auto-core circle { fill: #c8fbff; }
@@ -27,50 +23,52 @@
 .auto-node-dot { fill: #67e7f5; filter: drop-shadow(0 0 5px rgba(38,203,229,.75)); }
 .auto-nodes text { fill: #d6eef1; font-size: 16px; letter-spacing: .02em; }
 
-.growth-header text { fill: #77919a; font-size: 11px; letter-spacing: .15em; }
-.growth-header circle { fill: #55e0f0; filter: drop-shadow(0 0 5px rgba(32,197,225,.6)); }
+.growth-title { fill: #92aab2; font-size: 11px; font-weight: 600; letter-spacing: .105em; }
 .chart-grid line { stroke: rgba(106,166,190,.13); stroke-width: 1; }
-.growth-bars rect { fill: rgba(24,148,176,.19); }
+.growth-bars rect { fill: rgba(24,148,176,.18); }
 .chart-line { fill: none; stroke-linecap: round; }
-.chart-line-secondary { stroke: rgba(73,143,169,.28); stroke-width: 1.6; }
-.chart-line-main { stroke-width: 3.5; stroke-dasharray: 1100; stroke-dashoffset: 1100; animation: line-draw 2.3s .15s ease forwards; }
-.chart-points circle { fill: #dcfbff; stroke: #20c8e4; stroke-width: 3; animation: node-pulse 3.1s ease-in-out infinite; }
-.growth-axis text { fill: #657f89; font-size: 10px; letter-spacing: .13em; }
-.growth-note path { fill: none; stroke: rgba(57,185,211,.4); stroke-width: 1; }
-.growth-note text { fill: #6cd7e7; font-size: 10px; letter-spacing: .12em; }
+.chart-line-secondary { stroke: rgba(73,143,169,.3); stroke-width: 1.7; }
+.chart-line-main { stroke-width: 3.8; stroke-dasharray: 1100; stroke-dashoffset: 1100; animation: line-draw 2.3s .15s ease forwards; }
+.chart-points circle:not(.growth-final-halo) { fill: #dcfbff; stroke: #20c8e4; stroke-width: 3; animation: node-pulse 3.1s ease-in-out infinite; }
+.growth-point text { fill: #8fb0b8; font-size: 12px; font-weight: 600; }
+.growth-point.is-final text { fill: #d8fbff; font-size: 16px; }
+.growth-final-halo { fill: rgba(32,197,225,.12); stroke: rgba(113,235,250,.34); stroke-width: 1; }
+.growth-total rect { fill: rgba(6,27,38,.9); stroke: rgba(72,197,219,.32); }
+.growth-total text { fill: #d5f7fa; font-size: 13px; font-weight: 600; letter-spacing: .06em; }
 
-.funnel-grid line { stroke: rgba(106,166,190,.09); stroke-width: 1; }
-.funnel-stage { opacity: .7; transition: opacity .25s ease, filter .25s ease; }
-.funnel-stage-list:hover .funnel-stage { opacity: .42; }
-.funnel-stage-list .funnel-stage:hover { opacity: 1; filter: drop-shadow(0 0 14px rgba(34,194,220,.22)); }
-.funnel-stage-shadow { fill: rgba(0,0,0,.28); filter: blur(6px); }
-.funnel-stage-glass { stroke: rgba(72,197,219,.2); }
-.funnel-stage-edge { fill: none; stroke-width: 1.2; }
-.funnel-stage-reflection { stroke: rgba(210,250,255,.16); stroke-width: 1; }
-.funnel-stage text { fill: #e5f5f7; font-size: 17px; font-weight: 600; letter-spacing: .1em; }
-.stage-2 { opacity: .78; }
-.stage-3 { opacity: .88; }
-.stage-4 { opacity: 1; }
-.funnel-spine-static { fill: none; stroke: rgba(76,217,236,.42); stroke-width: 1.6; stroke-dasharray: 4 10; }
-.funnel-flow-points circle { fill: #d9fbff; stroke: #25cbe6; stroke-width: 2.5; }
+.funnel-floor-grid line { stroke: rgba(106,166,190,.06); stroke-width: 1; }
+.funnel-stage { cursor: pointer; opacity: .78; outline: none; transition: opacity .24s ease, filter .24s ease, transform .24s ease; transform-box: fill-box; transform-origin: center; }
+.funnel-stage.is-active { opacity: 1; filter: drop-shadow(0 0 17px rgba(34,194,220,.3)); transform: translateY(-3px); }
+.funnel-stage.is-dim { opacity: .34; }
+.funnel-stage:focus-visible { filter: drop-shadow(0 0 18px rgba(34,194,220,.32)); }
+.funnel-stage-shadow { fill: rgba(0,0,0,.34); filter: blur(8px); }
+.funnel-stage-top { stroke: rgba(72,197,219,.24); stroke-width: 1.1; }
+.funnel-stage-front { stroke: rgba(72,197,219,.16); stroke-width: 1; }
+.funnel-stage-edge { fill: none; stroke-width: 1.5; }
+.funnel-stage-reflection { stroke: rgba(210,250,255,.2); stroke-width: 1; }
+.funnel-stage text { fill: #e5f5f7; font-size: 18px; font-weight: 600; letter-spacing: .11em; pointer-events: none; }
 
-.signal-grid line { stroke: rgba(106,166,190,.08); stroke-width: 1; }
-.signal-baseline { fill: none; stroke: url(#signalStroke); stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 7px rgba(34,203,229,.28)); }
-.signal-origin-halo { fill: rgba(20,150,179,.07); stroke: rgba(47,193,222,.24); }
-.signal-origin text,
-.signal-package text,
-.signal-network text,
-.signal-demand text,
-.signal-system text { fill: #9bbac2; font-size: 11px; letter-spacing: .08em; }
-.signal-package rect { fill: rgba(7,31,43,.74); stroke: rgba(70,203,225,.42); }
-.signal-package path { stroke: rgba(101,220,237,.55); stroke-width: 2; }
-.signal-package circle { fill: #78e7f4; }
-.signal-network > circle { fill: rgba(13,57,72,.09); stroke: rgba(55,192,216,.22); }
-.signal-network > circle:nth-child(2) { stroke-dasharray: 6 8; }
-.signal-network path { stroke: rgba(63,187,211,.32); stroke-width: 1.2; }
-.signal-network g circle { fill: #9ef0f8; stroke: #20bfd9; stroke-width: 2; }
-.signal-waves path { fill: none; stroke: rgba(51,205,229,.38); stroke-width: 2; }
-.signal-demand path { fill: none; stroke: rgba(105,229,242,.62); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.signal-system > circle { fill: rgba(11,50,64,.2); stroke: rgba(74,205,226,.36); }
-.signal-system > circle:nth-child(2) { stroke-dasharray: 5 7; }
-.signal-flow circle { fill: #bdf8fd; stroke: #22c5df; stroke-width: 2; animation: node-pulse 3s ease-in-out infinite; }
+.partner-grid line { stroke: rgba(106,166,190,.06); stroke-width: 1; }
+.partner-network-ring { fill: rgba(13,57,72,.08); stroke: rgba(55,192,216,.24); }
+.partner-network-ring.inner { stroke-dasharray: 6 8; }
+.partner-network path { stroke: rgba(63,187,211,.34); stroke-width: 1.25; }
+.partner-network g circle { fill: #a6f3fa; stroke: #20bfd9; stroke-width: 2; }
+.partner-network text,
+.partner-megaphone text,
+.lead-stream text,
+.business-unit text,
+.repeat-label { fill: #9bbac2; font-size: 11px; font-weight: 500; letter-spacing: .08em; }
+.megaphone-body { fill: rgba(7,31,43,.78); stroke: rgba(105,229,242,.64); stroke-width: 2; stroke-linejoin: round; }
+.megaphone-handle { fill: rgba(7,31,43,.72); stroke: rgba(105,229,242,.5); stroke-width: 2; }
+.megaphone-wave { fill: none; stroke: rgba(105,229,242,.5); stroke-width: 2; stroke-linecap: round; }
+.partner-flow-line { fill: none; stroke: url(#partnerStroke); stroke-width: 2.5; stroke-dasharray: 8 10; animation: dash-flow 8s linear infinite; }
+.lead-user circle,
+.lead-user path { fill: none; stroke: rgba(189,248,253,.72); stroke-width: 1.4; }
+.pipeline-visual:hover .lead-user { animation: lead-pulse 1.8s ease-in-out infinite; }
+.business-unit rect { fill: rgba(7,31,43,.78); stroke: rgba(74,205,226,.45); stroke-width: 1.4; }
+.business-unit path { fill: none; stroke: rgba(105,229,242,.52); stroke-width: 2; }
+.business-unit text { fill: #d9f6f8; font-size: 12px; }
+.repeat-loop,
+.repeat-arrow { fill: none; stroke: rgba(74,205,226,.42); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+@keyframes lead-pulse { 0%, 100% { opacity: .48; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.08); } }
