@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { cases, education, experience, expertise } from "./content";
+import { cases, clientSegments, education, experience, expertise } from "./content";
 import ExpertiseIcon from "./ExpertiseIcon";
 import HeroTrend from "./HeroTrend";
 import CaseVisual from "./CaseVisual";
@@ -52,6 +52,7 @@ export default function App() {
         ><span /><span /></button>
         <nav className={menuOpen ? "site-nav is-open" : "site-nav"} aria-label="Основная навигация">
           <a href="#expertise" onClick={closeMenu}>Экспертиза</a>
+          <a href="#clients" onClick={closeMenu}>Клиенты</a>
           <a href="#projects" onClick={closeMenu}>Кейсы</a>
           <a href="#experience" onClick={closeMenu}>Опыт</a>
           <a href="#education" onClick={closeMenu}>Образование</a>
@@ -78,7 +79,15 @@ export default function App() {
         <div className="hero-media" aria-hidden="true">
           <HeroTrend />
           <div className="portrait-aura" />
-          <img className="hero-portrait" src={`${base}assets/alina-portrait-cutout.svg`} alt="" onError={(event: { currentTarget: HTMLImageElement }) => { event.currentTarget.onerror = null; event.currentTarget.src = `${base}assets/alina-portrait.jpg`; }} />
+          <img
+            className="hero-portrait"
+            src={`${base}assets/alina-portrait-cutout.svg`}
+            alt=""
+            onError={(event) => {
+              event.currentTarget.onerror = null;
+              event.currentTarget.src = `${base}assets/alina-portrait.jpg`;
+            }}
+          />
         </div>
       </section>
 
@@ -98,10 +107,38 @@ export default function App() {
         </div>
       </section>
 
+      <section className="section clients" id="clients" data-reveal>
+        <div className="clients-heading">
+          <div className="section-heading compact-heading">
+            <p>Клиентский портфель</p>
+            <h2>Бренды и компании из разных отраслей</h2>
+          </div>
+          <p>Федеральные бренды, девелоперы, промышленность, сервисы и общественные институты.</p>
+        </div>
+        <div className="client-segments">
+          {clientSegments.map((segment) => (
+            <article className={segment.isPartner ? "client-row is-partner" : "client-row"} key={segment.title}>
+              <h3>{segment.title}</h3>
+              <div className="client-strip" tabIndex={0} aria-label={`${segment.title}: список компаний`}>
+                {segment.clients.map((client) => <span key={client}>{client}</span>)}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section projects" id="projects">
-        <div className="section-heading" data-reveal>
-          <p>Бизнес-кейсы</p>
-          <h2>Результаты, подтверждённые цифрами</h2>
+        <div className="projects-intro" data-reveal>
+          <div className="section-heading">
+            <p>Бизнес-кейсы</p>
+            <h2>Результаты, подтверждённые цифрами</h2>
+          </div>
+          <div className="projects-directions" aria-label="Направления кейсов">
+            <span>Коммерция</span>
+            <span>Операционное управление</span>
+            <span>Маркетинг</span>
+            <span>Запуск продукта</span>
+          </div>
         </div>
         <div className="project-list">
           {cases.map((project, index) => (
@@ -112,13 +149,23 @@ export default function App() {
                 <p className="case-description">{project.text}</p>
                 <div className={`metric-grid metric-grid-${project.facts.length}`}>
                   {project.facts.map(([value, caption]) => (
-                    <div key={`${value}-${caption}`}><strong>{value}</strong><span>{caption}</span></div>
+                    <div className={value.length > 7 ? "metric-long" : undefined} key={`${value}-${caption}`}>
+                      <strong>{value}</strong><span>{caption}</span>
+                    </div>
                   ))}
                 </div>
               </div>
               <div className="visual-shell" aria-label={`Визуализация кейса ${index + 1}`}>
                 <CaseVisual type={project.visual} />
               </div>
+              <details className="case-details">
+                <summary>Подробнее о кейсе <span aria-hidden="true">↓</span></summary>
+                <div className="case-details-grid">
+                  <section><h4>Проблема</h4><p>{project.details.problem}</p></section>
+                  <section><h4>Подход</h4><p>{project.details.approach}</p></section>
+                  <section><h4>Решение</h4><p>{project.details.solution}</p></section>
+                </div>
+              </details>
             </article>
           ))}
         </div>
@@ -126,21 +173,30 @@ export default function App() {
 
       <section className="section experience" id="experience" data-reveal>
         <div className="section-heading compact-heading"><p>Опыт</p><h2>Управленческий трек</h2></div>
-        <div className="experience-list">
+        <div className="experience-track" aria-label="Горизонтальный карьерный трек">
           {experience.map(([years, role, company, scope]) => (
-            <article key={`${years}-${company}`}>
-              <time>{years}</time><h3>{role}</h3><p className="company">{company}</p><p className="scope">{scope}</p>
+            <article className="experience-step" key={`${years}-${company}`}>
+              <time>{years}</time>
+              <h3>{role}</h3>
+              <p className="company">{company}</p>
+              <p className="scope">{scope}</p>
             </article>
           ))}
         </div>
       </section>
 
       <section className="section education" id="education" data-reveal>
-        <div className="section-heading"><p>Образование</p><h2>Образование и курсы повышения квалификации</h2></div>
-        <div className="education-list">
-          {education.map(([year, title, source]) => (
-            <article key={`${year}-${title}`}><time>{year}</time><h3>{title}</h3><p>{source}</p></article>
-          ))}
+        <div className="education-layout">
+          <div className="education-heading">
+            <p className="section-label">Образование</p>
+            <h2>Образование и курсы повышения квалификации</h2>
+            <p>Системное управление, маркетинг, аналитика, автоматизация и развитие команд.</p>
+          </div>
+          <div className="education-list">
+            {education.map(([year, title, source]) => (
+              <article key={`${year}-${title}`}><time>{year}</time><div><h3>{title}</h3><p>{source}</p></div></article>
+            ))}
+          </div>
         </div>
       </section>
 
