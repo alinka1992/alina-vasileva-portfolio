@@ -1,11 +1,15 @@
-/* Client portfolio below expertise: transparent, larger and readable. */
+/* Final spacing rhythm below the hero. The mobile hero itself is intentionally untouched. */
+:root {
+  --section-space: clamp(58px, 5.8vw, 88px);
+}
+
 .expertise {
   overflow: hidden;
 }
 
 .expertise-clients {
-  margin-top: clamp(38px, 4.5vw, 64px);
-  padding-top: clamp(20px, 2.4vw, 30px);
+  margin-top: clamp(28px, 3.4vw, 46px);
+  padding-top: clamp(16px, 1.9vw, 24px);
   border-top: 1px solid rgba(116, 169, 191, .16);
   background: transparent;
 }
@@ -33,7 +37,7 @@
 
 .expertise-client-marquee {
   width: 100%;
-  margin-top: 18px;
+  margin-top: 14px;
   overflow: hidden;
   border: 0 !important;
   background: transparent !important;
@@ -44,20 +48,22 @@
 .expertise-client-marquee .client-marquee-track {
   width: max-content;
   flex-wrap: nowrap;
-  animation-duration: 78s;
+  will-change: transform;
+  animation: client-marquee 58s linear infinite !important;
+  animation-play-state: running !important;
 }
 
 .expertise-client-marquee .client-marquee-group {
-  min-height: 46px;
-  padding-right: 30px;
+  min-height: 42px;
+  padding-right: 26px;
   flex-wrap: nowrap;
   white-space: nowrap;
 }
 
 .expertise-client-marquee .client-marquee-group span {
-  padding: 0 18px;
+  padding: 0 17px;
   color: #d7e1e4;
-  font-size: clamp(14px, 1.15vw, 18px);
+  font-size: clamp(14px, 1.1vw, 17px);
   font-weight: 300;
   letter-spacing: .01em;
 }
@@ -67,22 +73,72 @@
   color: rgba(32, 197, 225, .5);
 }
 
+/* Tighten only the oversized gaps between content blocks. */
+.project-list {
+  gap: clamp(50px, 4.7vw, 74px) !important;
+  margin-top: clamp(28px, 3vw, 40px) !important;
+}
+
+.case-panel {
+  padding-top: clamp(20px, 2vw, 28px) !important;
+}
+
+.projects-intro {
+  padding-bottom: clamp(24px, 2.4vw, 31px) !important;
+}
+
 @media (max-width: 759px) {
+  :root {
+    --section-space: 52px;
+  }
+
   .expertise-clients {
-    margin-top: 34px;
-    padding-top: 20px;
+    margin-top: 26px;
+    padding-top: 16px;
   }
 
   .expertise-client-marquee {
     width: calc(100% + var(--page-x));
+    margin-top: 12px;
+    padding-right: var(--page-x);
+  }
+
+  .expertise-client-marquee .client-marquee-track,
+  .expertise-client-marquee:hover .client-marquee-track,
+  .expertise-client-marquee:focus .client-marquee-track,
+  .expertise-client-marquee:focus-within .client-marquee-track {
+    animation: client-marquee 44s linear infinite !important;
+    animation-play-state: running !important;
   }
 
   .expertise-client-marquee .client-marquee-group {
-    min-height: 42px;
+    min-height: 38px;
+    padding-right: 20px;
   }
 
   .expertise-client-marquee .client-marquee-group span {
-    padding: 0 14px;
+    padding: 0 13px;
     font-size: 14px;
+  }
+
+  .project-list {
+    gap: 42px !important;
+    margin-top: 28px !important;
+  }
+
+  .case-panel {
+    gap: 20px !important;
+    padding-top: 22px !important;
+  }
+
+  .projects-intro {
+    padding-bottom: 24px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expertise-client-marquee .client-marquee-track {
+    animation: none !important;
+    transform: none !important;
   }
 }
