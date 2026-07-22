@@ -1,0 +1,24 @@
+/* Desktop-only hero polish: show the full face and give the client label breathing room. */
+@media (min-width: 760px) {
+  .hero-portrait {
+    right: clamp(6px, 2.2vw, 42px) !important;
+    bottom: -1.5% !important;
+    width: min(44vw, 680px) !important;
+  }
+
+  .portrait-light {
+    right: 1% !important;
+    bottom: -7% !important;
+    width: 66% !important;
+    height: 84% !important;
+  }
+
+  .hero-clients {
+    margin-top: 12px !important;
+  }
+
+  .hero-clients-label {
+    margin-bottom: 11px !important;
+    padding-left: calc(var(--page-x) + 8px) !important;
+  }
+}
