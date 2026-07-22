@@ -1,20 +1,37 @@
-/* Approved case images: one scale, one grid and no dark card beneath the artwork. */
+/* Case images: one scale, no card or neon frame, softly dissolved into the site. */
 .case-panel .visual-shell {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1 !important;
   padding: 0 !important;
   overflow: hidden;
   border: 0 !important;
-  border-radius: var(--glass-radius);
+  border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   isolation: isolate;
 }
 
-.case-panel .visual-shell::before,
-.case-panel .visual-shell::after {
+.case-panel .visual-shell::before {
   display: none !important;
+}
+
+.case-panel .visual-shell::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 2;
+  display: block !important;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 78% 78% at 50% 50%,
+    transparent 0%,
+    transparent 69%,
+    rgba(2, 7, 13, .08) 78%,
+    rgba(2, 7, 13, .48) 90%,
+    #02070d 100%
+  );
 }
 
 .case-visual-image {
@@ -25,12 +42,29 @@
   object-fit: cover;
   object-position: center;
   border: 0;
-  border-radius: inherit;
+  border-radius: 0;
   background: transparent;
   box-shadow: none;
-  transform: scale(1.045);
+  transform: scale(1.14);
   transform-origin: center;
   mix-blend-mode: screen;
+  filter: saturate(.96) contrast(1.02);
+  -webkit-mask-image: radial-gradient(
+    ellipse 88% 88% at 50% 50%,
+    #000 0%,
+    #000 72%,
+    rgba(0, 0, 0, .92) 82%,
+    rgba(0, 0, 0, .42) 93%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 88% 88% at 50% 50%,
+    #000 0%,
+    #000 72%,
+    rgba(0, 0, 0, .92) 82%,
+    rgba(0, 0, 0, .42) 93%,
+    transparent 100%
+  );
 }
 
 /* Keep every case balanced: equal text and image columns, identical artwork size. */
