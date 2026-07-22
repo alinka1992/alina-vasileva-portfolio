@@ -1,73 +1,49 @@
-/* Case images: one scale, no card or neon frame, softly dissolved into the site. */
+/* Programmed case visuals: transparent SVGs drawn directly on the landing background. */
 .case-panel .visual-shell {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1 !important;
+  aspect-ratio: 1.28 / 1 !important;
+  display: grid;
+  place-items: center;
   padding: 0 !important;
-  overflow: hidden;
+  overflow: visible !important;
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
-  isolation: isolate;
+  isolation: auto;
 }
 
-.case-panel .visual-shell::before {
-  display: none !important;
-}
-
+.case-panel .visual-shell::before,
 .case-panel .visual-shell::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  z-index: 2;
-  display: block !important;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse 78% 78% at 50% 50%,
-    transparent 0%,
-    transparent 69%,
-    rgba(2, 7, 13, .08) 78%,
-    rgba(2, 7, 13, .48) 90%,
-    #02070d 100%
-  );
+  display: none !important;
+  content: none !important;
 }
 
-.case-visual-image {
+.case-panel .data-visual {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: none;
-  object-fit: cover;
-  object-position: center;
+  overflow: visible;
   border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
-  transform: scale(1.14);
   transform-origin: center;
-  mix-blend-mode: screen;
-  filter: saturate(.96) contrast(1.02);
-  -webkit-mask-image: radial-gradient(
-    ellipse 88% 88% at 50% 50%,
-    #000 0%,
-    #000 72%,
-    rgba(0, 0, 0, .92) 82%,
-    rgba(0, 0, 0, .42) 93%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 88% 88% at 50% 50%,
-    #000 0%,
-    #000 72%,
-    rgba(0, 0, 0, .92) 82%,
-    rgba(0, 0, 0, .42) 93%,
-    transparent 100%
-  );
+  filter: drop-shadow(0 18px 42px rgba(0, 0, 0, .18));
 }
 
-/* Keep every case balanced: equal text and image columns, identical artwork size. */
+/* Individual optical scales: equal perceived mass, not one blind scale for every visual. */
+.case-growth .data-visual { transform: scale(.96); }
+.case-automation .data-visual { transform: scale(.99); }
+.case-funnel .data-visual { transform: scale(.94); }
+.case-pipeline .data-visual { transform: scale(.98); }
+
+/* Keep every case balanced: equal text and visual columns and consistent visual height. */
 @media (min-width: 860px) {
   .case-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -76,7 +52,7 @@
   }
 
   .case-panel .visual-shell {
-    width: min(100%, 610px);
+    width: min(100%, 620px);
     justify-self: center;
     margin-top: 0 !important;
   }
@@ -84,20 +60,15 @@
   .case-copy {
     width: 100%;
     max-width: 560px !important;
-    min-height: min(43vw, 610px);
+    min-height: min(34vw, 500px);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-block: clamp(14px, 2vw, 30px);
+    padding-block: clamp(14px, 2vw, 28px);
   }
 
-  .case-panel:nth-child(odd) .case-copy {
-    justify-self: start;
-  }
-
-  .case-panel:nth-child(even) .case-copy {
-    justify-self: end;
-  }
+  .case-panel:nth-child(odd) .case-copy { justify-self: start; }
+  .case-panel:nth-child(even) .case-copy { justify-self: end; }
 
   .case-copy .metric-grid,
   .case-automation .metric-grid {
@@ -105,18 +76,82 @@
     margin-top: auto !important;
   }
 
-  .case-automation .metric-owner {
-    grid-column: 1 / -1;
-  }
-
-  .case-description {
-    max-width: 39ch;
-  }
+  .case-automation .metric-owner { grid-column: 1 / -1; }
+  .case-description { max-width: 39ch; }
 }
 
 @media (max-width: 859px) {
   .case-panel .visual-shell {
     width: min(100%, 620px);
     margin-inline: auto;
+  }
+}
+
+/* Minimal motion only: line reveal, quiet node light and restrained glow. */
+.auto-back-panel,
+.auto-center-panel,
+.auto-core,
+.auto-nodes > g,
+.audience-person,
+.network-ring.inner,
+.network-node,
+.business-coin {
+  animation: case-soft-glow 6s ease-in-out infinite !important;
+}
+
+.auto-back-panel:nth-of-type(2),
+.auto-nodes > g:nth-child(even),
+.network-node:nth-child(even) {
+  animation-delay: -2.4s !important;
+}
+
+.funnel-stage {
+  animation: case-stage-breathe 6.4s ease-in-out infinite;
+}
+.funnel-stage:nth-child(2) { animation-delay: -.8s; }
+.funnel-stage:nth-child(3) { animation-delay: -1.6s; }
+.funnel-stage:nth-child(4) { animation-delay: -2.4s; }
+
+.seminar-signal {
+  animation: case-signal-glow 4.8s ease-in-out infinite !important;
+}
+
+.chart-line-main,
+.auto-mini-line {
+  animation-iteration-count: 1 !important;
+}
+
+@keyframes case-soft-glow {
+  0%, 100% {
+    opacity: .78;
+    filter: drop-shadow(0 0 2px rgba(32, 197, 225, .08));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 9px rgba(32, 197, 225, .2));
+  }
+}
+
+@keyframes case-stage-breathe {
+  0%, 100% { opacity: .76; }
+  50% { opacity: .94; }
+}
+
+@keyframes case-signal-glow {
+  0%, 100% {
+    opacity: .35;
+    filter: drop-shadow(0 0 3px rgba(32, 197, 225, .2));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(32, 197, 225, .45));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-panel .data-visual,
+  .case-panel .data-visual * {
+    animation: none !important;
+    transition: none !important;
   }
 }
