@@ -7,36 +7,51 @@
   line-height: 1.45 !important;
 }
 
-/* Desktop-only hero: keep the approved portrait composition and never crop the face. */
+/* Desktop hero only. Mobile layout remains untouched. */
 @media (min-width: 760px) {
+  .hero {
+    grid-template-rows: minmax(0, 1fr) auto !important;
+  }
+
+  .hero-copy {
+    align-self: center;
+    padding-bottom: clamp(18px, 2.8vh, 32px) !important;
+  }
+
   .hero-media {
     overflow: hidden;
   }
 
+  /* Reference scale: compact portrait on the right, full face and jacket visible. */
   .hero-portrait {
-    top: clamp(6px, 1.2vh, 14px) !important;
-    right: clamp(6px, 2.2vw, 42px) !important;
-    bottom: auto !important;
-    width: min(44vw, 680px) !important;
+    top: auto !important;
+    right: clamp(18px, 3.2vw, 62px) !important;
+    bottom: clamp(42px, 6vh, 66px) !important;
+    width: clamp(
+      420px,
+      min(35vw, calc((100svh - var(--header-h) - 40px) * .6667)),
+      610px
+    ) !important;
     max-width: none !important;
-    max-height: none !important;
+    max-height: calc(100% - 18px) !important;
     height: auto !important;
     object-fit: contain !important;
-    object-position: right top !important;
+    object-position: right bottom !important;
   }
 
   .portrait-light {
-    top: 4% !important;
+    top: auto !important;
     right: 1% !important;
-    bottom: auto !important;
-    width: 66% !important;
-    height: 84% !important;
+    bottom: 2% !important;
+    width: 58% !important;
+    height: 76% !important;
   }
 
-  /* Approved client-portfolio treatment: heading above the ticker with its own accent. */
+  /* Approved client portfolio: separate label, accent stroke and one clean ticker line. */
   .hero-clients {
-    margin-top: 18px !important;
-    padding-top: 14px !important;
+    align-self: end;
+    margin-top: clamp(18px, 2.5vh, 28px) !important;
+    padding-top: 13px !important;
     padding-bottom: 14px !important;
     border-top: 1px solid rgba(116, 169, 191, .17);
   }
@@ -44,8 +59,8 @@
   .hero-clients-label {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 0 0 11px !important;
+    gap: 11px;
+    margin: 0 0 10px !important;
     padding: 0 var(--page-x) !important;
     color: #d3dde0 !important;
     font-size: 9px !important;
@@ -63,17 +78,50 @@
   }
 
   .hero-clients .client-marquee {
+    width: 100% !important;
+    overflow: hidden !important;
     border-top: 0 !important;
     border-bottom: 0 !important;
+    cursor: default !important;
+    scrollbar-width: none;
+  }
+
+  .hero-clients .client-marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-clients .client-marquee-track {
+    width: max-content;
+    flex-wrap: nowrap;
+  }
+
+  .hero-clients .client-marquee-group {
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
 }
 
-/* Browser zoom reduces the CSS viewport. Keep the portrait large enough,
-   but anchored from the top so the forehead, eyes and smile stay visible. */
+/* Browser zoom turns a desktop into a narrower CSS viewport.
+   Keep the same composition without letting the portrait jump or cover the copy. */
 @media (min-width: 760px) and (max-width: 1180px) {
+  .hero {
+    grid-template-columns: minmax(350px, 1fr) minmax(300px, .82fr) !important;
+  }
+
   .hero-portrait {
-    top: 4px !important;
-    right: -1vw !important;
-    width: clamp(420px, 44vw, 560px) !important;
+    right: clamp(-8px, 1vw, 14px) !important;
+    bottom: clamp(40px, 5vh, 56px) !important;
+    width: clamp(380px, 43vw, 470px) !important;
+  }
+
+  .portrait-light {
+    right: -4% !important;
+    width: 62% !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero-portrait {
+    right: clamp(38px, 4vw, 84px) !important;
   }
 }
