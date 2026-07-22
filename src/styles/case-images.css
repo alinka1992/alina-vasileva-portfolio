@@ -1,5 +1,6 @@
-/* Approved case images: large, integrated and without a second frame. */
+/* Approved case images: one scale, one grid and no dark card beneath the artwork. */
 .case-panel .visual-shell {
+  width: 100%;
   aspect-ratio: 1 / 1 !important;
   padding: 0 !important;
   overflow: hidden;
@@ -8,6 +9,7 @@
   background: transparent !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
+  isolation: isolate;
 }
 
 .case-panel .visual-shell::before,
@@ -26,5 +28,61 @@
   border-radius: inherit;
   background: transparent;
   box-shadow: none;
-  transform: scale(1.002);
+  transform: scale(1.045);
+  transform-origin: center;
+  mix-blend-mode: screen;
+}
+
+/* Keep every case balanced: equal text and image columns, identical artwork size. */
+@media (min-width: 860px) {
+  .case-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(44px, 5vw, 76px) !important;
+    align-items: center !important;
+  }
+
+  .case-panel .visual-shell {
+    width: min(100%, 610px);
+    justify-self: center;
+    margin-top: 0 !important;
+  }
+
+  .case-copy {
+    width: 100%;
+    max-width: 560px !important;
+    min-height: min(43vw, 610px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-block: clamp(14px, 2vw, 30px);
+  }
+
+  .case-panel:nth-child(odd) .case-copy {
+    justify-self: start;
+  }
+
+  .case-panel:nth-child(even) .case-copy {
+    justify-self: end;
+  }
+
+  .case-copy .metric-grid,
+  .case-automation .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    margin-top: auto !important;
+  }
+
+  .case-automation .metric-owner {
+    grid-column: 1 / -1;
+  }
+
+  .case-description {
+    max-width: 39ch;
+  }
+}
+
+@media (max-width: 859px) {
+  .case-panel .visual-shell {
+    width: min(100%, 620px);
+    margin-inline: auto;
+  }
 }
