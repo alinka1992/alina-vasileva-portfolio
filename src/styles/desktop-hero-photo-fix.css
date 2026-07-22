@@ -1,3 +1,12 @@
+/* Visible higher education line, separate from the newest-first course list. */
+.education-degree {
+  margin: 22px 0 0 !important;
+  color: #dce7e9 !important;
+  font-size: 15px !important;
+  font-weight: 400;
+  line-height: 1.45 !important;
+}
+
 /* Desktop-only hero: keep the approved portrait composition and never crop the face. */
 @media (min-width: 760px) {
   .hero-media {
@@ -24,13 +33,38 @@
     height: 84% !important;
   }
 
+  /* Approved client-portfolio treatment: heading above the ticker with its own accent. */
   .hero-clients {
-    margin-top: 12px !important;
+    margin-top: 18px !important;
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    border-top: 1px solid rgba(116, 169, 191, .17);
   }
 
   .hero-clients-label {
-    margin-bottom: 11px !important;
-    padding-left: calc(var(--page-x) + 8px) !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 11px !important;
+    padding: 0 var(--page-x) !important;
+    color: #d3dde0 !important;
+    font-size: 9px !important;
+    font-weight: 650;
+    line-height: 1.2;
+    letter-spacing: .14em;
+  }
+
+  .hero-clients-label::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 2px;
+    height: 13px;
+    background: var(--cyan);
+  }
+
+  .hero-clients .client-marquee {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
   }
 }
 
